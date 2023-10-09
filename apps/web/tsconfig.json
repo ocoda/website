@@ -1,8 +1,26 @@
 {
-  "extends": "config/tsconfig/remix.json",
-  "include": [
-    "remix.env.d.ts",
-    "**/*.ts",
-    "**/*.tsx"
-  ],
+  "extends": "config/tsconfig/base.json",
+  "compilerOptions": {
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2022"
+    ],
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "target": "ES2022",
+    "strict": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": [
+        "./src/*"
+      ]
+    },
+    "noEmit": true
+  }
 }
