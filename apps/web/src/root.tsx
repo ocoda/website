@@ -1,7 +1,7 @@
 import type { LinksFunction } from '@remix-run/node';
 import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
 
-import styles from './tailwind.css';
+import styles from './styles/app.css';
 
 export const links: LinksFunction = () => [
 	{ rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -26,7 +26,7 @@ export default function App() {
 				<Meta />
 				<Links />
 			</head>
-			<body>
+			<body className="h-screen w-screen flex flex-col items-stretch">
 				<Outlet />
 				<ScrollRestoration />
 				<Scripts />
