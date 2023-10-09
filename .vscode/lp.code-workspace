@@ -7,6 +7,14 @@
 		{
 			"name": "web",
 			"path": "../apps/web"
+		},
+		{
+			"name": "infrastructure",
+			"path": "../apps/infrastructure"
+		},
+		{
+			"name": "packages",
+			"path": "../packages"
 		}
 	],
 	"settings": {

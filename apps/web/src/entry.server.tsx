@@ -57,6 +57,7 @@ function handleBotRequest(
 					reject(error);
 				},
 				onError(error: unknown) {
+					// biome-ignore lint: remix inner workings
 					responseStatusCode = 500;
 					// Log streaming rendering errors from inside the shell.  Don't log
 					// errors encountered during initial shell rendering since they'll
@@ -103,6 +104,7 @@ function handleBrowserRequest(
 					reject(error);
 				},
 				onError(error: unknown) {
+					// biome-ignore lint: remix inner workings
 					responseStatusCode = 500;
 					// Log streaming rendering errors from inside the shell.  Don't log
 					// errors encountered during initial shell rendering since they'll

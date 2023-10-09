@@ -1,15 +1,15 @@
 {
-  "private": true,
-  "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "turbo run format"
-  },
-  "devDependencies": {
-    "config": "workspace:*",
-    "turbo": "latest"
-  },
-  "packageManager": "pnpm@8.6.10",
-  "name": "lp"
+	"private": true,
+	"scripts": {
+		"build": "turbo run build",
+		"dev": "turbo run dev",
+		"lint": "turbo run lint",
+		"format": "turbo run format"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.2.2",
+		"turbo": "latest"
+	},
+	"packageManager": "pnpm@8.6.10",
+	"name": "lp"
 }

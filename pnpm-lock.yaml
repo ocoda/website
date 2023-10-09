@@ -4,9 +4,9 @@ importers:
 
   .:
     devDependencies:
-      config:
-        specifier: workspace:*
-        version: link:packages/config
+      '@biomejs/biome':
+        specifier: 1.2.2
+        version: 1.2.2
       turbo:
         specifier: latest
         version: 1.9.3
