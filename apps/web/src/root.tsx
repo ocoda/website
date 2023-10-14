@@ -26,7 +26,7 @@ export default function App() {
 				<Meta />
 				<Links />
 			</head>
-			<body className="h-screen w-screen flex flex-col items-stretch">
+			<body className="h-screen w-screen flex flex-col items-stretch bg-black">
 				<Outlet />
 				<ScrollRestoration />
 				<Scripts />

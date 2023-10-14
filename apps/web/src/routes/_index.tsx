@@ -25,17 +25,10 @@ export default function Index() {
 					<img src="img/ocoda_logo_full_gradient.svg" alt="Ocoda" />
 				</a>
 			</h1>
-			{/* <div className="absolute flex flex-col bottom-0 left-0 w-full h-1/5">
-				<div
-					className="place-self-start h-32 w-full bg-repeat-x bg-bottom bg-cover animate-wave"
-					style={{ background: 'url(img/wave.svg) repeat-x', transform: 'translate3d(0, 0, 0)' }}
-				/>
-				<div
-					className="place-self-start h-32 w-full bg-repeat-x bg-bottom bg-cover animate-wave"
-					style={{ background: 'url(img/wave.svg) repeat-x', transform: 'translate3d(0, 0, 0)' }}
-				/>
-				<div className="" />
-			</div> */}
+			<div className="h-[5%] min-h-24 w-full absolute bottom-0 right-0 bg-purple">
+				<div className="bg-wave bg-repeat-x absolute h-[198px] -top-[198px] w-[6400px] animate-wave" />
+				<div className="bg-wave bg-repeat-x absolute h-[198px] -top-[175px] w-[6400px] animate-wave-and-swell opacity-1" />
+			</div>
 		</>
 	);
 }
