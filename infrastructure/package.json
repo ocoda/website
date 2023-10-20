@@ -7,7 +7,10 @@
   "scripts": {
     "aws:login": "aws sso login --sso-session ocoda",
     "diff": "cdk diff --context stage=staging --profile ocoda-staging --all",
-    "diff:prod": "cdk diff --context stage=production --profile ocoda-production --all"
+    "diff:prod": "cdk diff --context stage=production --profile ocoda-production --all",
+		"deploy": "cdk deploy --context stage=staging --profile ocoda-staging --all",
+		"deploy:prod": "cdk deploy --context stage=production --profile ocoda-production --all",
+    "build": "echo 'Waited for web first'"
   },
   "devDependencies": {
     "@remix-run/architect": "^2.1.0",

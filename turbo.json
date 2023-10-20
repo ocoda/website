@@ -9,6 +9,12 @@
     },
     "lint": {},
     "format": {},
+    "deploy": {
+      "dependsOn": ["^web#build"]
+    },
+    "deploy:prod": {
+      "dependsOn": ["^web#build"]
+    },
     "dev": {
       "cache": false,
       "persistent": true
