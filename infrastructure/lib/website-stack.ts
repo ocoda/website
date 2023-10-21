@@ -47,7 +47,7 @@ export class WebsiteStack extends Stack {
 
 	private createCertificate(hostedZone: IHostedZone): ICertificate {
 		return new Certificate(this, 'OcodaWebsiteCertificate', {
-			domainName: this.domainName,
+			domainName: `*.${this.domainName}`,
 			validation: CertificateValidation.fromDns(hostedZone),
 		});
 	}
