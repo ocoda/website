@@ -13,7 +13,7 @@ import {
 } from 'aws-cdk-lib/aws-cloudfront';
 import { S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { Code, Function as LambdaFunction, Runtime } from 'aws-cdk-lib/aws-lambda';
-import { HostedZone } from 'aws-cdk-lib/aws-route53';
+import { ARecord, AaaaRecord, HostedZone, IHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
 import { BlockPublicAccess, Bucket, IBucket } from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
 import { join } from 'path';
@@ -22,6 +22,7 @@ import { BucketDeployment, CacheControl, Source } from 'aws-cdk-lib/aws-s3-deplo
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { getDomainName } from './utils';
 import { Stack, StackProps } from './constructs';
+import { CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
 
 export class WebsiteStack extends Stack {
 	readonly domainName: string;
@@ -33,17 +34,18 @@ export class WebsiteStack extends Stack {
 		this.buildPath = join(__dirname, '../../apps/web/build');
 		this.domainName = getDomainName(this.stage);
 
-		const certificate = this.createCertificate();
+		const hostedZone = HostedZone.fromLookup(this, 'OcodaHostedZone', { domainName: this.domainName });
+		const certificate = this.createCertificate(hostedZone);
 		const bucket = this.createAssetBucket();
 
 		const serverFunction = this.createRemixServerFunction();
 		const distribution = this.createDistribution(bucket, certificate, serverFunction);
+		this.createRecords(hostedZone, distribution);
 
 		this.createRemixBucketDeployment(bucket, distribution);
 	}
 
-	private createCertificate(): ICertificate {
-		const hostedZone = HostedZone.fromLookup(this, 'OcodaHostedZone', { domainName: this.domainName });
+	private createCertificate(hostedZone: IHostedZone): ICertificate {
 		return new Certificate(this, 'OcodaWebsiteCertificate', {
 			domainName: this.domainName,
 			validation: CertificateValidation.fromDns(hostedZone),
@@ -88,6 +90,19 @@ export class WebsiteStack extends Stack {
 					originRequestPolicy: OriginRequestPolicy.CORS_S3_ORIGIN,
 				},
 			},
+		});
+	}
+
+	private createRecords(hostedZone: IHostedZone, distribution: IDistribution) {
+		new ARecord(this, 'OcodaWebsiteARecord', {
+			zone: hostedZone,
+			target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
+			recordName: `*.${this.domainName}`,
+		});
+		new AaaaRecord(this, 'OcodaWebsiteAAAARecord', {
+			recordName: `*.${this.domainName}`,
+			zone: hostedZone,
+			target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
 		});
 	}
 
