@@ -4,7 +4,7 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "remix build && esbuild ./src/lambda.ts --bundle --outfile=./build/lambda-server/index.js --minify --tree-shaking --target=node18  --platform=node --tsconfig=./tsconfig.lambda.json --external:aws-sdk --external:@aws-sdk",
+    "build": "rm -rf ./build && remix build && esbuild ./src/lambda/index.ts --bundle --outfile=./build/lambda/index.js --minify --tree-shaking --target=node18  --platform=node --tsconfig=./tsconfig.lambda.json --external:aws-sdk --external:@aws-sdk",
     "dev": "remix dev --manual",
     "start": "remix-serve ./build/index.js",
     "format": "biome format ./src --write",
@@ -21,9 +21,10 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.2.2",
-    "@remix-run/architect": "^2.1.0",
     "@remix-run/dev": "^2.0.1",
     "@remix-run/eslint-config": "^2.0.1",
+    "@remix-run/server-runtime": "^2.0.1",
+    "@types/aws-lambda": "^8.10.125",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "config": "workspace:*",

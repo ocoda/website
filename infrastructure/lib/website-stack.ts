@@ -111,7 +111,7 @@ export class WebsiteStack extends Stack {
 			description: 'Ocoda website remix server function',
 			runtime: Runtime.NODEJS_18_X,
 			handler: 'index.handler',
-			code: Code.fromAsset(join(this.buildPath, 'lambda-server')),
+			code: Code.fromAsset(join(this.buildPath, 'lambda')),
 			memorySize: 256,
 			logRetention: RetentionDays.THREE_DAYS,
 		});
