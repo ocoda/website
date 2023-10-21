@@ -14,6 +14,12 @@ export const links: LinksFunction = () => [
 		rel: 'stylesheet',
 		href: 'https://fonts.googleapis.com/css2?family=Fredoka&display=swap',
 	},
+	{
+		rel: 'preload',
+		href: '/images/wave.svg',
+		as: 'image',
+		type: 'image/svg+xml',
+	},
 	{ rel: 'stylesheet', href: styles },
 ];
 

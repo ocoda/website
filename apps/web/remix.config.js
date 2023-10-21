@@ -2,8 +2,8 @@
 export default {
 	appDirectory: 'src',
 	ignoredRouteFiles: ['**/.*'],
-	assetsBuildDirectory: 'build/public/assets',
-	publicPath: '/assets',
+	assetsBuildDirectory: 'build/public',
+	publicPath: '/public',
 	serverBuildPath: 'build/server/index.js',
 	serverPlatform: 'node',
 };
