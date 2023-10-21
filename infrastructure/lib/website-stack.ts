@@ -26,12 +26,12 @@ import { CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
 
 export class WebsiteStack extends Stack {
 	readonly domainName: string;
-	readonly buildPath: string;
+	readonly sourcePath: string;
 
 	constructor(scope: Construct, id: string, props?: StackProps) {
 		super(scope, id, props);
 
-		this.buildPath = join(__dirname, '../../apps/web/build');
+		this.sourcePath = join(__dirname, '../../apps/web');
 		this.domainName = getDomainName(this.stage);
 
 		const hostedZone = HostedZone.fromLookup(this, 'OcodaHostedZone', { domainName: this.domainName });
@@ -81,7 +81,7 @@ export class WebsiteStack extends Stack {
 			httpVersion: HttpVersion.HTTP2_AND_3,
 			minimumProtocolVersion: SecurityPolicyProtocol.TLS_V1_2_2021,
 			additionalBehaviors: {
-				'assets/*': {
+				'public/*': {
 					allowedMethods: AllowedMethods.ALLOW_GET_HEAD,
 					cachePolicy: CachePolicy.CACHING_OPTIMIZED,
 					compress: true,
@@ -111,7 +111,7 @@ export class WebsiteStack extends Stack {
 			description: 'Ocoda website remix server function',
 			runtime: Runtime.NODEJS_18_X,
 			handler: 'index.handler',
-			code: Code.fromAsset(join(this.buildPath, 'lambda')),
+			code: Code.fromAsset(join(this.sourcePath, '/build/lambda')),
 			memorySize: 256,
 			logRetention: RetentionDays.THREE_DAYS,
 		});
@@ -122,7 +122,7 @@ export class WebsiteStack extends Stack {
 			destinationBucket: bucket,
 			distribution,
 			prune: true,
-			sources: [Source.asset(join(this.buildPath, 'public'))],
+			sources: [Source.asset(join(this.sourcePath, '/build/public')), Source.asset(join(this.sourcePath, '/public'))],
 			cacheControl: [CacheControl.maxAge(Duration.days(365)), CacheControl.sMaxAge(Duration.days(365))],
 		});
 	}
