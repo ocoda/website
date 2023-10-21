@@ -6,5 +6,13 @@
   "hosted-zone:account=885710628647:domainName=ocoda.be:region=eu-central-1": {
     "Id": "/hostedzone/Z013798134IV9S8OW5G3N",
     "Name": "ocoda.be."
+  },
+  "hosted-zone:account=828320123858:domainName=ocoda.dev:region=us-east-1": {
+    "Id": "/hostedzone/Z0324131S0W5LF2XJ5GL",
+    "Name": "ocoda.dev."
+  },
+  "hosted-zone:account=885710628647:domainName=ocoda.be:region=us-east-1": {
+    "Id": "/hostedzone/Z013798134IV9S8OW5G3N",
+    "Name": "ocoda.be."
   }
 }
