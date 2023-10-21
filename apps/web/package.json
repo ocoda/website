@@ -4,7 +4,7 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "remix build",
+    "build": "remix build && esbuild ./src/lambda.ts --bundle --outfile=./build/lambda-server/index.js --minify --tree-shaking --target=node18  --platform=node --tsconfig=./tsconfig.lambda.json --external:aws-sdk --external:@aws-sdk",
     "dev": "remix dev --manual",
     "start": "remix-serve ./build/index.js",
     "format": "biome format ./src --write",
