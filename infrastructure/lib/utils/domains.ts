@@ -1,6 +1,6 @@
 import { Stage } from '../constructs';
 
-export const getDomainName = (stage: Stage) => {
+export const getApexDomain = (stage: Stage) => {
 	switch (stage) {
 		case Stage.STAGING:
 			return 'ocoda.dev';
