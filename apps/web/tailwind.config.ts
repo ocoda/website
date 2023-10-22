@@ -13,9 +13,6 @@ export default {
 			fontFamily: {
 				sans: ['Fredoka'],
 			},
-			backgroundImage: {
-				wave: "url('/img/wave.svg')",
-			},
 			animation: {
 				wave: 'wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite',
 				'wave-and-swell':

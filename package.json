@@ -3,6 +3,8 @@
 	"scripts": {
 		"build": "turbo run build",
 		"dev": "turbo run dev",
+		"deploy": "turbo run deploy",
+		"deploy:prod": "turbo run deploy:prod",
 		"lint": "turbo run lint",
 		"format": "turbo run format"
 	},
