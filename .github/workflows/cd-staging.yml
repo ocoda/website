@@ -48,11 +48,10 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Configure AWS credentials
-        id: aws-credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: mcblair/configure-aws-profile-action@v0.1.1
         with:
-          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/OcodaWebsiteDeployer
-          aws-region: us-east-1
+          role-arn: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/OcodaWebsiteDeployer
+          profile-name: ocoda-staging
 
       - name: Deploy stacks
         run: |
