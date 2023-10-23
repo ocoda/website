@@ -1,5 +1,5 @@
 import { join } from 'path';
-import { Duration, RemovalPolicy, Tags } from 'aws-cdk-lib';
+import { Duration, RemovalPolicy } from 'aws-cdk-lib';
 import { Certificate, CertificateValidation, ICertificate } from 'aws-cdk-lib/aws-certificatemanager';
 import {
 	AllowedMethods,
