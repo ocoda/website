@@ -1,3 +1,4 @@
+import { join } from 'path';
 import { Duration, RemovalPolicy, Tags } from 'aws-cdk-lib';
 import { Certificate, CertificateValidation, ICertificate } from 'aws-cdk-lib/aws-certificatemanager';
 import {
@@ -14,16 +15,15 @@ import {
 } from 'aws-cdk-lib/aws-cloudfront';
 import { S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
 import { Code, Function as LambdaFunction, Runtime } from 'aws-cdk-lib/aws-lambda';
-import { ARecord, AaaaRecord, HostedZone, IHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
-import { BlockPublicAccess, Bucket, IBucket } from 'aws-cdk-lib/aws-s3';
-import { Construct } from 'constructs';
-import { join } from 'path';
-import { RetentionDays } from 'aws-cdk-lib/aws-logs';
-import { BucketDeployment, CacheControl, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
-import { getApexDomain } from './utils';
-import { Stack, StackProps, Stage } from './constructs';
+import { RetentionDays } from 'aws-cdk-lib/aws-logs';
+import { ARecord, AaaaRecord, HostedZone, IHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
 import { CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
+import { BlockPublicAccess, Bucket, IBucket } from 'aws-cdk-lib/aws-s3';
+import { BucketDeployment, CacheControl, Source } from 'aws-cdk-lib/aws-s3-deployment';
+import { Construct } from 'constructs';
+import { Stack, StackProps, Stage } from './constructs';
+import { getApexDomain } from './utils';
 
 export class WebsiteStack extends Stack {
 	readonly apexDomain: string;
