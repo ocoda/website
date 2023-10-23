@@ -17,16 +17,34 @@ jobs:
       id-token: write
       contents: read
     steps:
-      - name: Checkout repository
+      - name: Checkout the repository
         uses: actions/checkout@v3
 
-      - name: Setup node
+      - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'pnpm'
 
-      - name: Dependencies
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2	
+        with:
+          version: 8
+          run_install: false
+
+      - name: Get the pnpm store directory
+        shell: bash
+        run: |
+            echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup the pnpm cache
+        uses: actions/cache@v3
+        with:
+            path: ${{ env.STORE_PATH }}
+            key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+            restore-keys: |
+              ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Configure AWS credentials
@@ -34,13 +52,9 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/OcodaWebsiteDeployer
-          aws-region: us-west-2
+          aws-region: us-east-1
 
       - name: Deploy stacks
         run: |
-          ./node_modules/.bin/cdk deploy \
-            --context stage=staging \
-            --require-approval never \
-            --all \
-            --verbose
+          pnpm run deploy
 
