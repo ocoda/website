@@ -1,0 +1,46 @@
+name: CD staging
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+concurrency: staging
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: staging
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Configure AWS credentials
+        id: aws-credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/OcodaWebsiteDeployer
+          aws-region: us-west-2
+
+      - name: Deploy stacks
+        run: |
+          ./node_modules/.bin/cdk deploy \
+            --context stage=staging \
+            --require-approval never \
+            --all \
+            --verbose
+
