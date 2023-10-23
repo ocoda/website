@@ -35,7 +35,7 @@ export class OperationsStack extends Stack {
 				new PolicyStatement({
 					effect: Effect.ALLOW,
 					actions: ['sts:AssumeRole'],
-					resources: [`arn:aws:iam::${this.account}:role/OcodaWebsiteDeployer`],
+					resources: [`arn:aws:iam::${this.account}:role/cdk-*`],
 				}),
 			],
 		});
