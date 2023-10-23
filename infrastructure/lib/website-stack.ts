@@ -1,4 +1,4 @@
-import { Duration, RemovalPolicy } from 'aws-cdk-lib';
+import { Duration, RemovalPolicy, Tags } from 'aws-cdk-lib';
 import { Certificate, CertificateValidation, ICertificate } from 'aws-cdk-lib/aws-certificatemanager';
 import {
 	AllowedMethods,
@@ -12,15 +12,8 @@ import {
 	SecurityPolicyProtocol,
 	ViewerProtocolPolicy,
 } from 'aws-cdk-lib/aws-cloudfront';
-import { HttpOrigin, S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
-import {
-	Code,
-	FunctionUrl,
-	FunctionUrlAuthType,
-	InvokeMode,
-	Function as LambdaFunction,
-	Runtime,
-} from 'aws-cdk-lib/aws-lambda';
+import { S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
+import { Code, Function as LambdaFunction, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { ARecord, AaaaRecord, HostedZone, IHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
 import { BlockPublicAccess, Bucket, IBucket } from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
@@ -36,7 +29,7 @@ export class WebsiteStack extends Stack {
 	readonly apexDomain: string;
 	readonly sourcePath: string;
 
-	constructor(scope: Construct, id: string, props?: StackProps) {
+	constructor(scope: Construct, id: string, props: StackProps) {
 		super(scope, id, props);
 
 		this.sourcePath = join(__dirname, '../../apps/web');
