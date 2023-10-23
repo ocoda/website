@@ -1,8 +1,7 @@
-import { Stack as BaseStack, StackProps as BaseStackProps, region_info } from 'aws-cdk-lib';
+import { Stack as BaseStack, StackProps as BaseStackProps, Tags } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 
 import { InvalidStageException } from './exceptions';
-import { RegionInfo } from 'aws-cdk-lib/region-info';
 
 export enum Stage {
 	STAGING = 'staging',
@@ -11,15 +10,18 @@ export enum Stage {
 
 const { CDK_DEFAULT_ACCOUNT: account, CDK_DEFAULT_REGION: region } = process.env;
 
-export type StackProps = BaseStackProps;
+export interface StackProps extends BaseStackProps {
+	project: string;
+}
 
 export class Stack extends BaseStack {
 	readonly stage: Stage;
 
-	constructor(scope: Construct, id: string, props?: StackProps) {
+	constructor(scope: Construct, id: string, props: StackProps) {
+		const { project, ...baseProps } = props;
 		super(scope, id, {
-			...props,
-			env: { account: props?.env?.account || account, region: props?.env?.region || region },
+			...baseProps,
+			env: { account: baseProps?.env?.account || account, region: baseProps?.env?.region || region },
 		});
 
 		const stage = this.node.tryGetContext('stage') as Stage;
@@ -34,5 +36,9 @@ export class Stack extends BaseStack {
 			default:
 				throw new InvalidStageException();
 		}
+
+		Tags.of(this).add('project', project);
+		Tags.of(this).add('stack', this.stackName);
+		Tags.of(this).add('environment', stage);
 	}
 }
