@@ -15,6 +15,7 @@
     "lint": "biome check ./bin ./lib --apply"
   },
   "devDependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.438.0",
     "@biomejs/biome": "1.2.2",
     "@types/jest": "^29.5.5",
     "@types/node": "20.7.1",
