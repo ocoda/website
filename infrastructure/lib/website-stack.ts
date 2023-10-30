@@ -3,8 +3,11 @@ import { Duration, RemovalPolicy } from 'aws-cdk-lib';
 import { Certificate, CertificateValidation, ICertificate } from 'aws-cdk-lib/aws-certificatemanager';
 import {
 	AllowedMethods,
+	CacheHeaderBehavior,
 	CachePolicy,
+	CacheQueryStringBehavior,
 	Distribution,
+	EdgeLambda,
 	HttpVersion,
 	IDistribution,
 	LambdaEdgeEventType,
@@ -12,9 +15,10 @@ import {
 	OriginRequestPolicy,
 	SecurityPolicyProtocol,
 	ViewerProtocolPolicy,
+	experimental,
 } from 'aws-cdk-lib/aws-cloudfront';
 import { S3Origin } from 'aws-cdk-lib/aws-cloudfront-origins';
-import { Code, Function as LambdaFunction, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { Architecture, Code, Function as LambdaFunction, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { ARecord, AaaaRecord, HostedZone, IHostedZone, RecordTarget } from 'aws-cdk-lib/aws-route53';
@@ -24,6 +28,13 @@ import { BucketDeployment, CacheControl, Source } from 'aws-cdk-lib/aws-s3-deplo
 import { Construct } from 'constructs';
 import { Stack, StackProps, Stage } from './constructs';
 import { getApexDomain } from './utils';
+import { Secret } from 'aws-cdk-lib/aws-secretsmanager';
+import { ArnPrincipal, PolicyStatement } from 'aws-cdk-lib/aws-iam';
+
+interface WebsiteFunctions {
+	authentication?: experimental.EdgeFunction;
+	server: experimental.EdgeFunction;
+}
 
 export class WebsiteStack extends Stack {
 	readonly apexDomain: string;
@@ -39,11 +50,15 @@ export class WebsiteStack extends Stack {
 		const certificate = this.createCertificate(hostedZone);
 		const bucket = this.createAssetBucket();
 
+		const functions: WebsiteFunctions = {
+			authentication: this.createAuthenticationFunction(),
+			server: this.createRemixServerFunction(),
+		};
+
 		// const redirectFunction = this.createRedirectFunction();
 		// const redirectDistribution = this.createRedirectDistribution(certificate, redirectFunction);
 
-		const serverFunction = this.createRemixServerFunction();
-		const serverDistribution = this.createServerDistribution(bucket, certificate, serverFunction);
+		const serverDistribution = this.createServerDistribution(bucket, certificate, functions);
 		this.createRecords(hostedZone, serverDistribution);
 
 		this.createRemixBucketDeployment(bucket, serverDistribution);
@@ -117,11 +132,22 @@ export class WebsiteStack extends Stack {
 	// 	});
 	// }
 
-	private createServerDistribution(bucket: IBucket, certificate: ICertificate, serverFunction: NodejsFunction) {
+	private createServerDistribution(bucket: IBucket, certificate: ICertificate, functions: WebsiteFunctions) {
 		const originAccessIdentity = new OriginAccessIdentity(this, 'OcodaWebsiteAssetsBucketOriginAccessIdentity');
 		bucket.grantRead(originAccessIdentity);
 
 		const origin = new S3Origin(bucket, { originAccessIdentity });
+
+		const edgeLambdas: EdgeLambda[] = [
+			...(functions.authentication
+				? [{ eventType: LambdaEdgeEventType.VIEWER_REQUEST, functionVersion: functions.authentication.currentVersion }]
+				: []),
+			{
+				eventType: LambdaEdgeEventType.ORIGIN_REQUEST,
+				functionVersion: functions.server.currentVersion,
+				includeBody: true,
+			},
+		];
 
 		return new Distribution(this, 'OcodaWebsiteDistribution', {
 			comment: 'Ocoda website distribution',
@@ -129,18 +155,12 @@ export class WebsiteStack extends Stack {
 			certificate,
 			defaultBehavior: {
 				origin,
-				originRequestPolicy: OriginRequestPolicy.ALL_VIEWER,
+				originRequestPolicy: OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
 				allowedMethods: AllowedMethods.ALLOW_ALL,
 				cachePolicy: CachePolicy.CACHING_DISABLED,
 				compress: true,
 				viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-				edgeLambdas: [
-					{
-						eventType: LambdaEdgeEventType.ORIGIN_REQUEST,
-						functionVersion: serverFunction.currentVersion,
-						includeBody: true,
-					},
-				],
+				edgeLambdas,
 			},
 			httpVersion: HttpVersion.HTTP2_AND_3,
 			minimumProtocolVersion: SecurityPolicyProtocol.TLS_V1_2_2021,
@@ -170,8 +190,8 @@ export class WebsiteStack extends Stack {
 		});
 	}
 
-	private createRemixServerFunction(): NodejsFunction {
-		return new LambdaFunction(this, 'OcodaWebsiteServerFunction', {
+	private createRemixServerFunction(): experimental.EdgeFunction {
+		return new experimental.EdgeFunction(this, 'OcodaWebsiteServerFunction', {
 			description: 'Ocoda website remix server function',
 			runtime: Runtime.NODEJS_18_X,
 			handler: 'index.handler',
@@ -193,5 +213,77 @@ export class WebsiteStack extends Stack {
 			sources: [Source.asset(join(this.sourcePath, '/build/public')), Source.asset(join(this.sourcePath, '/public'))],
 			cacheControl: [CacheControl.maxAge(Duration.days(365)), CacheControl.sMaxAge(Duration.days(365))],
 		});
+	}
+
+	private createAuthenticationFunction(): experimental.EdgeFunction | undefined {
+		if (this.stage === Stage.PRODUCTION) return;
+
+		const authCredentials = new Secret(this, 'OcodaWebsiteAuthenticationCredentials', {
+			secretName: 'ocoda-website-authentication',
+			description: 'Ocoda website authentication credentials to block search engines from indexing.',
+			generateSecretString: {
+				secretStringTemplate: JSON.stringify({ username: 'admin' }),
+				generateStringKey: 'password',
+			},
+		});
+
+		const authenticationFunction = new experimental.EdgeFunction(this, 'OcodaWebsiteAuthenticationFunction', {
+			description: 'Ocoda website authentication function',
+			runtime: Runtime.NODEJS_18_X,
+			handler: 'index.handler',
+			code: Code.fromInline(`
+				'use strict';
+
+				const { SecretsManagerClient, GetSecretValueCommand } = require('@aws-sdk/client-secrets-manager');
+				
+				const secretsManager = new SecretsManagerClient({ region: '${this.region}' });
+				
+				const fetchSecret = async (secretName) => {
+					const command = new GetSecretValueCommand({ SecretId: secretName });
+					const result = await secretsManager.send(command);
+					return JSON.parse(result.SecretString);
+				}
+				
+				exports.handler = async (event, context, callback) => {
+					try {
+						const request = event.Records[0].cf.request;
+						const headers = request.headers;
+				
+						const { username, password } = await fetchSecret('${authCredentials.secretName}');
+						const authString = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
+				
+						if (typeof headers.authorization === 'undefined' || headers.authorization[0].value !== authString) {
+							const response = {
+								status: '401',
+								statusDescription: 'Unauthorized',
+								body: 'Unauthorized',
+								headers: {
+									'www-authenticate': [{ key: 'WWW-Authenticate', value: 'Basic' }]
+								}
+							}
+				
+							callback(null, response);
+						}
+
+						callback(null, request)
+					} catch (error) {
+						console.error(error);
+					}
+				};
+			`),
+			logRetention: RetentionDays.THREE_DAYS,
+		});
+
+		if (authenticationFunction.lambda.role) {
+			authCredentials.addToResourcePolicy(
+				new PolicyStatement({
+					principals: [new ArnPrincipal(authenticationFunction.lambda.role.roleArn)],
+					actions: ['secretsmanager:GetSecretValue'],
+					resources: [authCredentials.secretArn],
+				}),
+			);
+		}
+
+		return authenticationFunction;
 	}
 }
