@@ -1,3 +1,0 @@
-## This PR...
-
-_Explain the purpose of the pull request_
