@@ -1,4 +1,20 @@
 {
   "extends": "@ocoda/website-config/typescript/base.json",
-  "include": ["index.ts", "index.d.ts", "lib/**/*.ts", "tests/**/*.ts"]
+  "compilerOptions": {
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "target": "ES2022",
+    "strict": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["app/*"]
+    },
+    "noEmit": true
+  }
 }

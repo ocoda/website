@@ -1,7 +1,10 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
   "tasks": {
-    "dev": {},
+    "dev": {
+      "persistent": true
+    },
     "lint": {},
     "format": {}
   }

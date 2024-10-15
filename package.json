@@ -1,27 +1,27 @@
 {
-	"name": "@ocoda/website",
-	"description": "Ocoda Website",
-	"author": "Dries Hooghe <dries@ocoda.be>",
-	"license": "MIT",
-	"private": true,
-	"scripts": {
-		"build": "turbo build",
-		"test": "turbo test",
-		"ci": "turbo ci",
-		"lint": "turbo lint",
-		"format": "turbo format"
-	},
-	"engines": {
-		"node": ">= 20.17.0"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "1.9.3",
-		"turbo": "^2.1.3",
-		"typescript": "5.6.3"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/ocoda/website"
-	},
-	"packageManager": "pnpm@9.12.1"
+  "name": "@ocoda/website",
+  "description": "Ocoda Website",
+  "author": "Dries Hooghe <dries@ocoda.be>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "test": "turbo test",
+    "lint": "turbo lint",
+    "format": "turbo format"
+  },
+  "engines": {
+    "node": ">= 20.17.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.3",
+    "turbo": "^2.1.3",
+    "typescript": "^5.6.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ocoda/website"
+  },
+  "packageManager": "pnpm@9.12.1"
 }
