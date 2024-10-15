@@ -1,0 +1,14 @@
+{
+  "name": "@ocoda/website",
+  "version": "1.0.0",
+  "description": "Ocoda.be Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dries Hooghe <dries@ocoda.be>",
+  "license": "ISC",
+  "devDependencies": {
+    "@ocoda/website-config": "workspace:*"
+  }
+}

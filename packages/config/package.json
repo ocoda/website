@@ -1,0 +1,7 @@
+{
+  "name": "@ocoda/website-config",
+  "version": "1.0.0",
+  "description": "Configuration files for the ocoda website project",
+  "author": "Dries Hooghe <dries@ocoda.be>",
+  "license": "MIT"
+}

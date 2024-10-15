@@ -18,6 +18,14 @@ importers:
         specifier: 5.6.3
         version: 5.6.3
 
+  apps/website:
+    devDependencies:
+      '@ocoda/website-config':
+        specifier: workspace:*
+        version: link:../../packages/config
+
+  packages/config: {}
+
 packages:
 
   '@biomejs/biome@1.9.3':
