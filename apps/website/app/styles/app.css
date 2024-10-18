@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --ocoda-gradient: linear-gradient(
+    135deg,
+    rgba(58, 28, 113, 1) 0%,
+    rgba(168, 85, 117, 1) 45%,
+    rgba(236, 144, 121, 1) 75%,
+    rgba(249, 165, 122, 1) 100%
+  );
+  --ocoda-gradient-inverse: linear-gradient(
+    135deg,
+    rgba(249, 165, 122, 1) 0%,
+    rgba(236, 144, 121, 1) 25%,
+    rgba(168, 85, 117, 1) 55%,
+    rgba(58, 28, 113, 1) 100%
+  );
+}
+
+.bg-ocoda-gradient {
+  background-image: var(--ocoda-gradient);
+}
+
+.bg-ocoda-gradient-inverse {
+  background-image: var(--ocoda-gradient-inverse);
+}
