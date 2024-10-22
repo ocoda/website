@@ -1,6 +1,9 @@
 import type { MetaFunction } from '@remix-run/node';
 
 import cloudComputingIllustration from '~/assets/illustrations/cloud_computing.svg';
+import cloudComputingExtra1Illustration from '~/assets/illustrations/cloud_computing_extra_1.svg';
+import cloudComputingExtra2Illustration from '~/assets/illustrations/cloud_computing_extra_2.svg';
+import cloudComputingExtra3Illustration from '~/assets/illustrations/cloud_computing_extra_3.svg';
 import wavesIllustration from '~/assets/illustrations/waves.svg';
 
 export const meta: MetaFunction = () => {
@@ -24,7 +27,7 @@ export default function Index() {
   return (
     <>
       <div className="px-16 md:px-8 pt-24">
-        <div className="container px-3 gap-4 mx-auto grid md:grid-cols-2 md:auto-cols-max items-center">
+        <div className="container p-8 my-4 gap-8 mx-auto grid md:grid-cols-2 md:auto-cols-max items-center">
           <div className="grid text-center md:text-left gap-4 text-black-900">
             <h1 className="text-5xl font-bold leading-tight">
               Your Trusted
@@ -36,12 +39,28 @@ export default function Index() {
               drive innovation and enhance efficiency.
             </p>
           </div>
-          <div className="py-6 text-center">
-            <img className="w-4/5 py-8 mx-auto z-50" src={cloudComputingIllustration} alt="Cloud computing" />
+          <div className="relative text-center w-4/5 lg:w-3/5 mx-auto">
+            <img className="w-full relative z-20" src={cloudComputingIllustration} alt="People monitoring statistics" />
+            <img
+              className="w-full absolute top-0 left-0 -z-10 animate-float-vertical"
+              src={cloudComputingExtra1Illustration}
+              alt="A cloud"
+            />
+            <img
+              className="w-full absolute top-0 bottom-0 left-0 right-0 -z-10 animate-float-depth"
+              src={cloudComputingExtra2Illustration}
+              alt="A monitor"
+            />
+            <img
+              className="w-full absolute bottom-0 right-0 -z-10 animate-float-depth"
+              style={{ animationDelay: '0.8s' }}
+              src={cloudComputingExtra3Illustration}
+              alt="A monitor"
+            />
           </div>
         </div>
       </div>
-      <div className="relative -mt-12 lg:-mt-24 -mb-[1px]">
+      <div className="relative -mt-4 lg:-mt-18 -mb-[1px]">
         <img className="w-full" src={wavesIllustration} alt="Waves" />
       </div>
       <section className="bg-white py-8">

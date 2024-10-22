@@ -77,6 +77,20 @@ export default {
           '950': '#40190f',
         },
       },
+      keyframes: {
+        'float-vertical': {
+          '0%, 100%': { transform: 'translate(0, 0);' },
+          '50%': { transform: 'translate(0, -0.25rem);' },
+        },
+        'float-depth': {
+          '0%, 100%': { transform: 'translate(0, 0);' },
+          '50%': { transform: 'translate(-0.10rem, -0.05rem);' },
+        },
+      },
+      animation: {
+        'float-vertical': 'float-vertical 3s ease-in-out infinite;',
+        'float-depth': 'float-depth 2.4s ease-in-out infinite;',
+      },
     },
   },
   plugins: [
