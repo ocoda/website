@@ -1,6 +1,6 @@
 import type { MetaFunction } from '@remix-run/node';
 
-import communicationIllustration from '~/assets/illustrations/communication.svg';
+import cloudComputingIllustration from '~/assets/illustrations/cloud_computing.svg';
 import wavesIllustration from '~/assets/illustrations/waves.svg';
 
 export const meta: MetaFunction = () => {
@@ -24,20 +24,20 @@ export default function Index() {
   return (
     <>
       <div className="px-16 md:px-8 pt-24">
-        <div className="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
-          <div className="flex flex-col w-full md:w-2/5 text-center md:text-left text-black-900">
-            <h1 className="my-4 text-5xl font-bold leading-tight">
+        <div className="container px-3 gap-4 mx-auto grid md:grid-cols-2 md:auto-cols-max items-center">
+          <div className="grid text-center md:text-left gap-4 text-black-900">
+            <h1 className="text-5xl font-bold leading-tight">
               Your Trusted
               <br />
               IT Solutions Partner
             </h1>
-            <p className="leading-normal text-2xl mb-8">
+            <p className="leading-normal text-2xl">
               Ocoda empowers businesses by delivering tailored IT consultancy services designed to optimize performance,
               drive innovation and enhance efficiency.
             </p>
           </div>
-          <div className="w-full md:w-3/5 py-6 text-center">
-            <img className="w-full md:w-4/5 z-50" src={communicationIllustration} alt="People communicating" />
+          <div className="py-6 text-center">
+            <img className="w-4/5 py-8 mx-auto z-50" src={cloudComputingIllustration} alt="Cloud computing" />
           </div>
         </div>
       </div>
