@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss';
 import { fontFamily } from 'tailwindcss/defaultTheme';
+import plugin from 'tailwindcss/plugin';
 
 export default {
   content: ['./app/**/*.{js,jsx,ts,tsx}'],
@@ -78,5 +79,20 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addBase, theme, config }) => {
+      const colors = theme('colors') || {};
+      const colorVariables = Object.keys(colors).reduce<Record<string, string>>((acc, color) => {
+        if (typeof colors[color] === 'object') {
+          const shades = colors[color];
+          for (const shade in shades) {
+            acc[`--color-${color}-${shade}`] = shades[shade];
+          }
+        }
+        return acc;
+      }, {});
+
+      addBase({ ':root': colorVariables });
+    }),
+  ],
 } satisfies Config;

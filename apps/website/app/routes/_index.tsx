@@ -25,7 +25,7 @@ export default function Index() {
     <>
       <div className="px-16 md:px-8 pt-24">
         <div className="container px-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
-          <div className="flex flex-col w-full md:w-2/5 justify-center items-center md:items-left text-center md:text-left text-black-900">
+          <div className="flex flex-col w-full md:w-2/5 text-center md:text-left text-black-900">
             <h1 className="my-4 text-5xl font-bold leading-tight">
               Your Trusted
               <br />

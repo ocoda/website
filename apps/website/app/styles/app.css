@@ -5,17 +5,17 @@
 :root {
   --ocoda-gradient: linear-gradient(
     135deg,
-    rgba(58, 28, 113, 1) 0%,
-    rgba(168, 85, 117, 1) 45%,
-    rgba(236, 144, 121, 1) 75%,
-    rgba(249, 165, 122, 1) 100%
+    var(--color-purple-950) 0%,
+    var(--color-red-600) 45%,
+    var(--color-sand-400) 75%,
+    var(--color-orange-300) 100%
   );
   --ocoda-gradient-inverse: linear-gradient(
     135deg,
-    rgba(249, 165, 122, 1) 0%,
-    rgba(236, 144, 121, 1) 25%,
-    rgba(168, 85, 117, 1) 55%,
-    rgba(58, 28, 113, 1) 100%
+    var(--color-orange-300) 0%,
+    var(--color-sand-400) 25%,
+    var(--color-red-600) 55%,
+    var(--color-purple-950) 100%
   );
 }
 
