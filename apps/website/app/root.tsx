@@ -1,10 +1,11 @@
 import type { LinksFunction } from '@remix-run/node';
-import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useRouteError } from '@remix-run/react';
 
 // @ts-ignore
 import styles from './styles/app.css?url';
 import { NavBar } from './components/layout/navigation/Navigation';
 import { Footer } from './components/layout/Footer';
+import { NotFoundMessage } from './components/404/NotFoundMessage';
 
 export const links: LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -37,6 +38,23 @@ export default function App() {
         <Footer />
         <Scripts />
         <LiveReload />
+      </body>
+    </html>
+  );
+}
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+  return (
+    <html lang="en">
+      <head>
+        <title>Oh no!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <NotFoundMessage error={error} />
+        <Scripts />
       </body>
     </html>
   );
