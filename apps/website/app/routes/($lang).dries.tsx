@@ -1,6 +1,7 @@
 import type { MetaFunction } from '@remix-run/node';
+import { getLocaleMetaTags } from '~/modules/i18n/resources';
 
-export const meta: MetaFunction = () => {
+export const meta: MetaFunction = ({ location }) => {
   return [
     { title: 'Ocoda' },
     {
@@ -14,6 +15,7 @@ export const meta: MetaFunction = () => {
     },
     { name: 'author', content: 'Ocoda BV' },
     { name: 'robots', content: 'all' },
+    ...getLocaleMetaTags(location.pathname),
   ];
 };
 

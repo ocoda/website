@@ -1,43 +1,46 @@
-import type { MetaFunction } from '@remix-run/node';
+import { json, type LoaderFunctionArgs, type MetaFunction } from '@remix-run/node';
+import { i18n } from '~/modules/i18n/i18n.server';
 
 import cloudComputingIllustration from '~/assets/illustrations/cloud_computing.svg';
 import cloudComputingExtra1Illustration from '~/assets/illustrations/cloud_computing_extra_1.svg';
 import cloudComputingExtra2Illustration from '~/assets/illustrations/cloud_computing_extra_2.svg';
 import cloudComputingExtra3Illustration from '~/assets/illustrations/cloud_computing_extra_3.svg';
 import wavesIllustration from '~/assets/illustrations/waves.svg';
+import { useLoaderData } from '@remix-run/react';
+import { getLocaleMetaTags } from '~/modules/i18n/resources';
 
-export const meta: MetaFunction = () => {
+export const handle = { i18n: 'home' };
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  const t = await i18n.getFixedT(request, 'home');
+  return json({ title: t('title'), description: t('description') });
+}
+
+export const meta: MetaFunction<typeof loader> = ({ data, location }) => {
   return [
-    { title: 'Ocoda' },
+    { title: data?.title },
     {
       title: 'keywords',
       content:
         'Ocoda BV,ocoda,it consulting,consulting,it consultancy,consultancy,it,ict,cloud,server,backend,ci,cd,cicd,automation,containerization,microservices,computing,amazon web services,aws,belgium',
     },
-    {
-      name: 'description',
-      content: 'Ocoda BV specializes in creating innovative web solutions.',
-    },
+    { name: 'description', content: data?.description },
     { name: 'author', content: 'Ocoda BV' },
     { name: 'robots', content: 'all' },
+    ...getLocaleMetaTags(location.pathname),
   ];
 };
 
 export default function Index() {
+  const { title, description } = useLoaderData<typeof loader>();
+
   return (
     <>
       <div className="px-16 md:px-8 pt-24">
         <div className="items-center gap-8 grid md:grid-cols-2 md:auto-cols-max mx-auto my-4 p-8 container">
           <div className="gap-4 grid text-black-900 text-center md:text-left">
-            <h1 className="font-bold text-5xl leading-tight">
-              Your Trusted
-              <br />
-              IT Solutions Partner
-            </h1>
-            <p className="text-2xl leading-normal">
-              Ocoda empowers businesses by delivering tailored IT consultancy services designed to optimize performance,
-              drive innovation and enhance efficiency.
-            </p>
+            <h1 className="font-bold text-5xl leading-tight whitespace-pre-line">{title}</h1>
+            <p className="text-2xl leading-normal">{description}</p>
           </div>
           <div className="relative mx-auto w-4/5 lg:w-3/5 text-center">
             <img className="relative z-20 w-full" src={cloudComputingIllustration} alt="People monitoring statistics" />
@@ -65,7 +68,7 @@ export default function Index() {
       </div>
       <section className="bg-white py-8">
         <div className="m-8 mx-auto max-w-5xl container">
-          <h2 className="my-2 w-full font-bold text-5xl text-center text-gray-800 leading-tight">Title</h2>
+          <h2 className="my-2 w-full font-bold text-5xl text-center text-gray-800 leading-tight">{'foo'}</h2>
           <div className="mb-4 w-full">
             <div className="opacity-25 mx-auto my-0 py-0 rounded-t w-64 h-1 gradient" />
           </div>

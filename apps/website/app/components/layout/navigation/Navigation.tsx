@@ -1,4 +1,4 @@
-import { Link, NavLink } from '@remix-run/react';
+import { Link } from '@remix-run/react';
 import { useEffect, useMemo, useState, type FC } from 'react';
 import { GithubIcon } from '~/icons/Github';
 import { LinkedInIcon } from '~/icons/LinkedIn';
@@ -7,21 +7,24 @@ import { MailIcon } from '~/icons/Mail';
 import { NavButton } from './NavButton';
 import { LinkButton } from './LinkButton';
 import { MenuButton } from './MenuButton';
+import { LanguageSelector } from './LanguageSelector';
+import { useTranslation } from 'react-i18next';
+import { ensureLocalizedURL } from '~/modules/i18n/resources';
 
 export const NavBar: FC = () => {
+  const { i18n } = useTranslation();
   const [offset, setOffset] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleMenuClick = () => setMenuOpen((prevState) => !prevState);
   const handleLinkClick = () => setMenuOpen(false);
 
-  // Memoize static website and social links to avoid re-creation on every render
   const websiteLinks = useMemo(
     () => [
-      { url: '/', copy: 'Home' },
-      { url: '/dries', copy: 'Meet Dries' },
+      { url: ensureLocalizedURL('/', i18n.language), copy: 'Home' },
+      { url: ensureLocalizedURL('/dries', i18n.language), copy: 'Meet Dries' },
     ],
-    [],
+    [i18n.language],
   );
 
   const socialLinks = useMemo(
@@ -33,7 +36,6 @@ export const NavBar: FC = () => {
     [],
   );
 
-  // Handle scroll events
   useEffect(() => {
     const onScroll = () => setOffset(window.scrollY);
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -49,7 +51,10 @@ export const NavBar: FC = () => {
     >
       <div className="grid grid-cols-[1fr_max-content] mx-auto px-6 py-4 container">
         <div className="flex items-center">
-          <Link to="/" className="flex items-center font-display text-2xl lg:text-4xl no-underline hover:no-underline">
+          <Link
+            to={`/${i18n.language}`}
+            className="flex items-center font-display text-2xl lg:text-4xl no-underline hover:no-underline"
+          >
             <OcodaIcon width={32} height={32} className="mr-4 text-purple-950" />
             <span className="bg-clip-text bg-ocoda-gradient-inverse text-transparent">OCODA</span>
           </Link>
@@ -70,6 +75,12 @@ export const NavBar: FC = () => {
               </li>
             ))}
           </ul>
+          <div
+            data-menu-open={menuOpen}
+            className="text-right lg:flex justify-end items-center hidden data-[menu-open=true]:grid text-lg"
+          >
+            <LanguageSelector />
+          </div>
           <ul
             data-menu-open={menuOpen}
             className="text-right lg:flex justify-end items-center hidden data-[menu-open=true]:grid data-[menu-open=true]:grid-flow-col text-lg"

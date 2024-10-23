@@ -1,5 +1,4 @@
-import { NavLink } from '@remix-run/react';
-import type { FC, ReactElement } from 'react';
+import type { FC } from 'react';
 
 interface Props {
   isScrolling: boolean;

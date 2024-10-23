@@ -1,11 +1,24 @@
-import type { LinksFunction } from '@remix-run/node';
-import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useRouteError } from '@remix-run/react';
+import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
+import { json, Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData, useRouteError } from '@remix-run/react';
 
 // @ts-ignore
 import styles from './styles/app.css?url';
 import { NavBar } from './components/layout/navigation/Navigation';
 import { Footer } from './components/layout/Footer';
 import { NotFoundMessage } from './components/404/NotFoundMessage';
+import { i18n } from '~/modules/i18n/i18n.server';
+import { useTranslation } from 'react-i18next';
+import { useChangeLanguage } from 'remix-i18next/react';
+import { getLngFromParams } from './modules/i18n/resources';
+
+export const loader = async ({ request, params }: LoaderFunctionArgs) => {
+  const locale = getLngFromParams(params) ?? (await i18n.getLocale(request));
+  return json({ locale });
+};
+
+export const handle = {
+  i18n: 'common',
+};
 
 export const links: LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -23,21 +36,25 @@ export const links: LinksFunction = () => [
 ];
 
 export default function App() {
+  const { locale } = useLoaderData<typeof loader>();
+  const { i18n } = useTranslation();
+
+  useChangeLanguage(locale);
+
   return (
-    <html lang="nl">
+    <html lang={locale} dir={i18n.dir()}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
         <Links />
       </head>
-      <body className="leading-normal tracking-normal text-white bg-gradient-to-r from-white from-10% lg:from-0% via-gray-300 to-gray-500 lg:to-gray-600">
+      <body className="bg-gradient-to-r from-10% from-white lg:from-0% via-gray-300 to-gray-500 lg:to-gray-600 text-white leading-normal tracking-normal">
         <NavBar />
         <Outlet />
         <ScrollRestoration />
         <Footer />
         <Scripts />
-        <LiveReload />
       </body>
     </html>
   );
@@ -45,8 +62,9 @@ export default function App() {
 
 export function ErrorBoundary() {
   const error = useRouteError();
+  const { locale } = useLoaderData<typeof loader>();
   return (
-    <html lang="en">
+    <html lang={locale}>
       <head>
         <title>Oh no!</title>
         <Meta />
