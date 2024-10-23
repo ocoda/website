@@ -4,7 +4,9 @@ import { GithubIcon } from '~/icons/Github';
 import { LinkedInIcon } from '~/icons/LinkedIn';
 import { OcodaIcon } from '~/icons/Ocoda';
 import { MailIcon } from '~/icons/Mail';
-import styles from './navigation.module.css';
+import { NavButton } from './NavButton';
+import { LinkButton } from './LinkButton';
+import { MenuButton } from './MenuButton';
 
 export const NavBar: FC = () => {
   const [offset, setOffset] = useState(0);
@@ -45,42 +47,36 @@ export const NavBar: FC = () => {
         offset > 10 || menuOpen ? 'bg-white' : ''
       }`}
     >
-      <div className={styles.menuWrapper}>
-        <div className="flex items-center pl-4">
+      <div className="grid grid-cols-[1fr_max-content] mx-auto px-6 py-4 container">
+        <div className="flex items-center">
           <Link to="/" className="flex items-center font-display text-2xl lg:text-4xl no-underline hover:no-underline">
             <OcodaIcon width={32} height={32} className="mr-4 text-purple-950" />
             <span className="bg-clip-text bg-ocoda-gradient-inverse text-transparent">OCODA</span>
           </Link>
         </div>
-        <label
-          aria-expanded={menuOpen}
-          className={`${styles.menuButton} ${offset > 10 || menuOpen ? 'text-black-950' : 'text-white'}`}
+        <MenuButton isOpen={menuOpen} isScrolling={offset > 10} onToggle={handleMenuClick} />
+        <div
+          data-menu-open={menuOpen}
+          data-is-scrolling={offset > 10}
+          className="z-20 lg:flex data-[menu-open=true]:col-span-2 w-full max-h-0 data-[menu-open=true]:max-h-dvh lg:max-h-none text-white data-[is-scrolling=true]:text-black-950 data-[menu-open=true]:text-black-950"
         >
-          <input type="checkbox" checked={menuOpen} onChange={handleMenuClick} />
-          <span />
-          <span />
-          <span />
-        </label>
-        <div className={`${styles.menu} ${menuOpen ? styles.menuOpen : ''} ${offset > 10 ? styles.menuScroll : ''}`}>
-          <ul className={`${styles.menuList} ${styles.menuListWebsite}`}>
+          <ul
+            data-menu-open={menuOpen}
+            className="text-right lg:flex items-center hidden data-[menu-open=true]:grid mt-4 lg:mt-0 text-lg"
+          >
             {websiteLinks.map(({ url, copy }) => (
               <li key={url}>
-                <NavLink
-                  to={url}
-                  onClick={handleLinkClick}
-                  className={({ isActive }) => `${styles.websiteLink} ${isActive ? styles.websiteLinkActive : ''}`}
-                >
-                  {copy}
-                </NavLink>
+                <NavButton to={url} onClick={handleLinkClick} copy={copy} />
               </li>
             ))}
           </ul>
-          <ul className={`${styles.menuList} ${styles.menuListSocial}`}>
+          <ul
+            data-menu-open={menuOpen}
+            className="text-right lg:flex justify-end items-center hidden data-[menu-open=true]:grid data-[menu-open=true]:grid-flow-col text-lg"
+          >
             {socialLinks.map(({ url, icon }) => (
               <li key={url}>
-                <Link to={url} onClick={handleLinkClick} target="_blank" className={styles.socialLink}>
-                  {icon}
-                </Link>
+                <LinkButton to={url} icon={icon} />
               </li>
             ))}
           </ul>
