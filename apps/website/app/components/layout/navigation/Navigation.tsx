@@ -46,10 +46,10 @@ export const NavBar: FC = () => {
       }`}
     >
       <div className={styles.menuWrapper}>
-        <div className="pl-4 flex items-center">
-          <Link to="/" className="no-underline hover:no-underline text-2xl lg:text-4xl flex items-center font-display">
+        <div className="flex items-center pl-4">
+          <Link to="/" className="flex items-center font-display text-2xl lg:text-4xl no-underline hover:no-underline">
             <OcodaIcon width={32} height={32} className="mr-4 text-purple-950" />
-            <span className="text-transparent bg-ocoda-gradient-inverse bg-clip-text">OCODA</span>
+            <span className="bg-clip-text bg-ocoda-gradient-inverse text-transparent">OCODA</span>
           </Link>
         </div>
         <label
@@ -86,7 +86,7 @@ export const NavBar: FC = () => {
           </ul>
         </div>
       </div>
-      <hr className="border-b border-gray-100 opacity-25 my-0 py-0" />
+      <hr className="border-gray-100 opacity-25 my-0 py-0 border-b" />
     </nav>
   );
 };

@@ -4,13 +4,13 @@ import { Link } from '@remix-run/react';
 export const Footer: FC = () => {
   return (
     <footer className="bg-white border-t text-gray-400 text-sm">
-      <div className="container mx-auto px-8 py-4 grid grid-cols-2 items-center">
+      <div className="items-center grid grid-cols-2 mx-auto px-8 py-4 container">
         <div className="flex flex-col gap-2">
           <span>Ocoda BV</span>
           <span>hello@ocoda.be</span>
           <span>VAT: BE 0123.456.7890</span>
         </div>
-        <div className="flex flex-col gap-2 col-start-3 items-end">
+        <div className="flex flex-col items-end gap-2 col-start-3">
           <span>Terms & Conditions</span>
           <span>Privacy Policy</span>
           <span>

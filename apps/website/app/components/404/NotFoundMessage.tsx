@@ -10,8 +10,8 @@ interface Props {
 export const NotFoundMessage: FC<Props> = ({ error }) => {
   console.error(error);
   return (
-    <div className="w-full h-dvh grid container justify-center items-center mx-auto">
-      <div className="flex flex-col gap-8 items-center">
+    <div className="justify-center items-center grid mx-auto w-full h-dvh container">
+      <div className="flex flex-col items-center gap-8">
         <img
           src={notFoundImage}
           alt="Moss from the IT crowd looking at the fire in his office"
@@ -20,7 +20,7 @@ export const NotFoundMessage: FC<Props> = ({ error }) => {
         <div className="font-display">You got lost - exclamation mark, exclamation mark</div>
         <NavLink
           to="/"
-          className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+          className="bg-white hover:bg-gray-50 shadow-sm px-3.5 py-2.5 rounded-md ring-1 ring-gray-300 ring-inset font-semibold text-gray-900 text-sm"
         >
           Let's get back to safety
         </NavLink>
