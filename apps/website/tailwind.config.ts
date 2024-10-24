@@ -86,15 +86,21 @@ export default {
           '0%, 100%': { transform: 'translate(0, 0);' },
           '50%': { transform: 'translate(-0.10rem, -0.05rem);' },
         },
+        bounce: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '33%': { transform: 'translateY(-15%)' },
+          '66%': { transform: 'translateY(15%)' },
+        },
       },
       animation: {
         'float-vertical': 'float-vertical 3s ease-in-out infinite;',
         'float-depth': 'float-depth 2.4s ease-in-out infinite;',
+        bounce: 'bounce 0.3s ease-in-out normal;',
       },
     },
   },
   plugins: [
-    plugin(({ addBase, theme, config }) => {
+    plugin(({ addBase, theme }) => {
       const colors = theme('colors') || {};
       const colorVariables = Object.keys(colors).reduce<Record<string, string>>((acc, color) => {
         if (typeof colors[color] === 'object') {

@@ -1,5 +1,5 @@
 import { Link } from '@remix-run/react';
-import { useEffect, useMemo, useState, type FC } from 'react';
+import { useEffect, useMemo, useRef, useState, type FC } from 'react';
 import { GithubIcon } from '~/icons/Github';
 import { LinkedInIcon } from '~/icons/LinkedIn';
 import { OcodaIcon } from '~/icons/Ocoda';
@@ -10,14 +10,18 @@ import { MenuButton } from './MenuButton';
 import { LanguageSelector } from './LanguageSelector';
 import { useTranslation } from 'react-i18next';
 import { ensureLocalizedURL } from '~/modules/i18n/resources';
+import { useClickOutside } from '~/utils/use-click-outside';
 
 export const NavBar: FC = () => {
+  const ref = useRef(null);
   const { i18n } = useTranslation();
   const [offset, setOffset] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleMenuClick = () => setMenuOpen((prevState) => !prevState);
   const handleLinkClick = () => setMenuOpen(false);
+
+  useClickOutside(ref, () => setMenuOpen(false));
 
   const websiteLinks = useMemo(
     () => [
@@ -48,6 +52,7 @@ export const NavBar: FC = () => {
       className={`fixed w-full z-30 top-0 text-black-950 transition-colors duration-150 ease-in-out ${
         offset > 10 || menuOpen ? 'bg-white' : ''
       }`}
+      ref={ref}
     >
       <div className="grid grid-cols-[1fr_max-content] mx-auto px-6 py-4 container">
         <div className="flex items-center">
