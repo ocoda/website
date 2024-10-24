@@ -37,7 +37,7 @@ export default function Index() {
   return (
     <>
       <div className="px-16 md:px-8 pt-24">
-        <div className="items-center gap-8 grid md:grid-cols-2 md:auto-cols-max mx-auto my-4 p-8 container">
+        <div className="items-center gap-8 grid md:grid-cols-2 md:auto-cols-max mx-auto md:my-4 md:p-8 container">
           <div className="gap-4 grid text-black-900 text-center md:text-left">
             <h1 className="font-bold text-5xl leading-tight whitespace-pre-line">{title}</h1>
             <p className="text-2xl leading-normal">{description}</p>
