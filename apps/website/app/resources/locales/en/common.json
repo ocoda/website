@@ -2,5 +2,9 @@
   "nav": {
     "home": "Home",
     "dries": "Dries"
+  },
+  "footer": {
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions"
   }
 }

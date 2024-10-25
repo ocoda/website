@@ -18,7 +18,7 @@ import { Footer } from './components/layout/Footer';
 import { i18n } from '~/modules/i18n/i18n.server';
 import { useTranslation } from 'react-i18next';
 import { useChangeLanguage } from 'remix-i18next/react';
-import { ensureLocalizedURL, getLngFromParams } from './modules/i18n/resources';
+import { ensureLocalizedURL, getLngFromParams } from '~/modules/i18n/resources';
 import { NotFoundMessage } from './components/404/NotFoundMessage';
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
@@ -72,18 +72,18 @@ export default function App() {
 
 export function ErrorBoundary() {
   const error = useRouteError();
-  const { locale } = useLoaderData<typeof loader>();
+  const { i18n } = useTranslation('common');
 
   if (isRouteErrorResponse(error)) {
     return (
-      <html lang={locale}>
+      <html lang={i18n.language}>
         <head>
           <title>Oh no!</title>
           <Meta />
           <Links />
         </head>
         <body>
-          <NotFoundMessage error={error} to={ensureLocalizedURL('/', locale)} />
+          <NotFoundMessage error={error} to={ensureLocalizedURL('/', i18n.language)} />
           <Scripts />
         </body>
       </html>
