@@ -22,5 +22,26 @@
     ]
   },
   "title": "Uw vertrouwde partner\nvoor IT oplossingen",
-  "description": "Ocoda versterkt bedrijven door op maat gemaakte IT consultancy diensten te leveren die zijn ontworpen om prestaties te optimaliseren, innovatie te stimuleren en efficiëntie te verbeteren."
+  "description": "Ocoda versterkt bedrijven door op maat gemaakte IT consultancy diensten te leveren die zijn ontworpen om prestaties te optimaliseren, innovatie te stimuleren en efficiëntie te verbeteren.",
+  "services": {
+    "title": "Wat Ocoda voor u kan betekenen",
+    "items": [
+      {
+        "title": "Cloud Oplossingen",
+        "description": "Met Amazon Web Services ontwerpen en implementeren we cloud infrastructuren die afgestemd zijn op uw behoeften aan schaalbaarheid, veerkracht en kosten. Van CI/CD-pijplijnen voor efficiëntere ontwikkeling tot containerisatie voor flexibiliteit, we helpen bij het realiseren van veilige en naadloze implementaties in verschillende omgevingen."
+      },
+      {
+        "title": "Backend Engineering",
+        "description": "Wij richten ons op het bouwen van betrouwbare en schaalbare backendsystemen die aansluiten op de behoeften van uw applicaties. Of het nu gaat om API-ontwikkeling of complexe integraties, we streven ernaar backend-oplossingen te bieden die bijdragen aan een soepele en responsieve gebruikerservaring op alle platforms."
+      },
+      {
+        "title": "Observability & Monitoring",
+        "description": "Onze monitoring- en observability-oplossingen zijn ontworpen om u waardevolle inzichten in uw applicaties en infrastructuur te geven in real-time. Door gebruik te maken van moderne monitoringtools, helpen we problemen vroegtijdig op te sporen en op te lossen om stabiliteit en prestaties te behouden."
+      },
+      {
+        "title": "Prestatieoptimalisatie",
+        "description": "We analyseren en implementeren zorgvuldige verbeteringen in code, infrastructuur en architectuur om snelheid te verhogen, latency te verminderen en de algehele efficiëntie te verbeteren. Deze optimalisaties zorgen ervoor dat uw systemen responsief, schaalbaar en klaar voor groei blijven."
+      }
+    ]
+  }
 }

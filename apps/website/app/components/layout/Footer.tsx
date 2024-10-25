@@ -11,7 +11,7 @@ export const Footer: FC = () => {
       <div className="items-center grid grid-cols-2 mx-auto px-8 py-4 container">
         <div className="flex flex-col gap-2">
           <span>Ocoda BV</span>
-          <span>hello@ocoda.be</span>
+          <Link to="mailto:hello@ocoda.be">hello@ocoda.be</Link>
           <span>VAT: BE 0123.456.7890</span>
         </div>
         <div className="flex flex-col items-end gap-2 col-start-3">

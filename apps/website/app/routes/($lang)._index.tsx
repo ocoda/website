@@ -17,6 +17,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
     meta: t('meta', { returnObjects: true }) as PageMetadata,
     title: t('title'),
     description: t('description'),
+    services: t('services', { returnObjects: true }) as {
+      title: string;
+      items: { title: string; description: string }[];
+    },
   });
 }
 
@@ -25,7 +29,7 @@ export const meta: MetaFunction<typeof loader> = ({ data, location }) => {
 };
 
 export default function Index() {
-  const { title, description } = useLoaderData<typeof loader>();
+  const { title, description, services } = useLoaderData<typeof loader>();
 
   return (
     <>
@@ -61,45 +65,24 @@ export default function Index() {
       </div>
       <section className="bg-white py-8">
         <div className="m-8 mx-auto max-w-5xl container">
-          <h2 className="my-2 w-full font-bold text-5xl text-center text-gray-800 leading-tight">{'foo'}</h2>
+          <h2 className="my-2 w-full font-bold text-5xl text-center text-gray-800 leading-tight">{services.title}</h2>
           <div className="mb-4 w-full">
             <div className="opacity-25 mx-auto my-0 py-0 rounded-t w-64 h-1 gradient" />
           </div>
-          <div className="flex flex-wrap">
-            <div className="p-6 w-5/6 sm:w-1/2">
-              <h3 className="mb-3 font-bold text-3xl text-gray-800 leading-none">Lorem ipsum dolor sit amet</h3>
-              <p className="mb-8 text-gray-600">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit
-                amet ligula.
-                <br />
-                <br />
-                Images from:
-                <a className="text-pink-500 underline" href="https://undraw.co/">
-                  undraw.co
-                </a>
-              </p>
-            </div>
-            <div className="p-6 w-full sm:w-1/2">Foo</div>
-          </div>
-          <div className="flex sm:flex-row flex-col-reverse flex-wrap">
-            <div className="mt-6 p-6 w-full sm:w-1/2">Foo</div>
-            <div className="mt-6 p-6 w-full sm:w-1/2">
-              <div className="align-middle">
-                <h3 className="mb-3 font-bold text-3xl text-gray-800 leading-none">Lorem ipsum dolor sit amet</h3>
-                <p className="mb-8 text-gray-600">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et
-                  sit amet ligula.
-                  <br />
-                  <br />
-                  Images from:
-                  <a className="text-pink-500 underline" href="https://undraw.co/">
-                    undraw.co
-                  </a>
-                </p>
+          <div className="">
+            {services.items.map(({ title, description }) => (
+              <div key={title} className="flex flex-wrap even:flex-row-reverse even:text-right">
+                <div className="p-6 w-full sm:w-2/3">
+                  <h3 className="mb-3 font-bold text-3xl text-gray-800 leading-none">{title}</h3>
+                  <p className="mb-8 text-gray-600">{description}</p>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
+      </section>
+      <section className="w-full h-60">
+        <img className="w-full -mt-px" style={{ transform: 'scale(-1, -1)' }} src={wavesIllustration} alt="Waves" />
       </section>
     </>
   );
