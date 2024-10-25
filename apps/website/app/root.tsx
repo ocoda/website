@@ -1,15 +1,25 @@
 import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
-import { json, Links, Meta, Outlet, Scripts, ScrollRestoration, useLoaderData, useRouteError } from '@remix-run/react';
+import {
+  isRouteErrorResponse,
+  json,
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useLoaderData,
+  useRouteError,
+} from '@remix-run/react';
 
 // @ts-ignore
 import styles from './styles/app.css?url';
 import { NavBar } from './components/layout/navigation/Navigation';
 import { Footer } from './components/layout/Footer';
-import { NotFoundMessage } from './components/404/NotFoundMessage';
 import { i18n } from '~/modules/i18n/i18n.server';
 import { useTranslation } from 'react-i18next';
 import { useChangeLanguage } from 'remix-i18next/react';
-import { getLngFromParams } from './modules/i18n/resources';
+import { ensureLocalizedURL, getLngFromParams } from './modules/i18n/resources';
+import { NotFoundMessage } from './components/404/NotFoundMessage';
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const locale = getLngFromParams(params) ?? (await i18n.getLocale(request));
@@ -63,17 +73,31 @@ export default function App() {
 export function ErrorBoundary() {
   const error = useRouteError();
   const { locale } = useLoaderData<typeof loader>();
-  return (
-    <html lang={locale}>
-      <head>
-        <title>Oh no!</title>
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <NotFoundMessage error={error} />
-        <Scripts />
-      </body>
-    </html>
-  );
+
+  if (isRouteErrorResponse(error)) {
+    return (
+      <html lang={locale}>
+        <head>
+          <title>Oh no!</title>
+          <Meta />
+          <Links />
+        </head>
+        <body>
+          <NotFoundMessage error={error} to={ensureLocalizedURL('/', locale)} />
+          <Scripts />
+        </body>
+      </html>
+    );
+  }
+  if (error instanceof Error) {
+    return (
+      <div>
+        <h1>Error</h1>
+        <p>{error.message}</p>
+        <p>The stack trace is:</p>
+        <pre>{error.stack}</pre>
+      </div>
+    );
+  }
+  return <h1>Unknown Error</h1>;
 }

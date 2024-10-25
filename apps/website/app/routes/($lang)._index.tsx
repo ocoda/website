@@ -7,28 +7,21 @@ import cloudComputingExtra2Illustration from '~/assets/illustrations/cloud_compu
 import cloudComputingExtra3Illustration from '~/assets/illustrations/cloud_computing_extra_3.svg';
 import wavesIllustration from '~/assets/illustrations/waves.svg';
 import { useLoaderData } from '@remix-run/react';
-import { getLocaleMetaTags } from '~/modules/i18n/resources';
+import { getDefaultMetaTags, getLocaleMetaTags, getPageMetaTags, type PageMetadata } from '~/modules/meta';
 
 export const handle = { i18n: 'home' };
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const t = await i18n.getFixedT(request, 'home');
-  return json({ title: t('title'), description: t('description') });
+  return json({
+    meta: t('meta', { returnObjects: true }) as PageMetadata,
+    title: t('title'),
+    description: t('description'),
+  });
 }
 
 export const meta: MetaFunction<typeof loader> = ({ data, location }) => {
-  return [
-    { title: data?.title },
-    {
-      title: 'keywords',
-      content:
-        'Ocoda BV,ocoda,it consulting,consulting,it consultancy,consultancy,it,ict,cloud,server,backend,ci,cd,cicd,automation,containerization,microservices,computing,amazon web services,aws,belgium',
-    },
-    { name: 'description', content: data?.description },
-    { name: 'author', content: 'Ocoda BV' },
-    { name: 'robots', content: 'all' },
-    ...getLocaleMetaTags(location.pathname),
-  ];
+  return [...getDefaultMetaTags(), ...getPageMetaTags(data?.meta), ...getLocaleMetaTags(location.pathname)];
 };
 
 export default function Index() {

@@ -1,27 +1,50 @@
-import type { MetaFunction } from '@remix-run/node';
-import { getLocaleMetaTags } from '~/modules/i18n/resources';
+import { json, type LoaderFunctionArgs, type MetaFunction } from '@remix-run/node';
+import { i18n } from '~/modules/i18n/i18n.server';
+import { getDefaultMetaTags, getLocaleMetaTags, getPageMetaTags, type PageMetadata } from '~/modules/meta';
 
-export const meta: MetaFunction = ({ location }) => {
-  return [
-    { title: 'Ocoda' },
-    {
-      title: 'keywords',
-      content:
-        'Ocoda BV,ocoda,it consulting,consulting,it consultancy,consultancy,it,ict,cloud,server,backend,ci,cd,cicd,automation,containerization,microservices,computing,amazon web services,aws,belgium',
-    },
-    {
-      name: 'description',
-      content: 'Ocoda BV specializes in creating innovative web solutions.',
-    },
-    { name: 'author', content: 'Ocoda BV' },
-    { name: 'robots', content: 'all' },
-    ...getLocaleMetaTags(location.pathname),
-  ];
+export async function loader({ request }: LoaderFunctionArgs) {
+  const t = await i18n.getFixedT(request, 'dries');
+  return json({
+    meta: t('meta', { returnObjects: true }) as PageMetadata,
+    title: t('title'),
+    description: t('description'),
+  });
+}
+
+export const meta: MetaFunction<typeof loader> = ({ data, location }) => {
+  return [...getDefaultMetaTags(), ...getPageMetaTags(data?.meta), ...getLocaleMetaTags(location.pathname)];
 };
 
 export default function Dries() {
   return (
     <>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
+      <div>There be Dries here</div>
       <div>There be Dries here</div>
     </>
   );

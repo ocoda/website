@@ -1,4 +1,26 @@
 {
+  "meta": {
+    "title": "Ocoda - Your Trusted IT Solutions Partner",
+    "description": "Ocoda empowers businesses by delivering tailored IT consultancy services designed to optimize performance, drive innovation and enhance efficiency.",
+    "keywords": [
+      "Ocoda BV",
+      "ocoda",
+      "it consulting",
+      "it consultancy",
+      "cloud",
+      "cloud consulting",
+      "cloud consultancy",
+      "ci",
+      "cd",
+      "cicd",
+      "devops",
+      "amazon web services",
+      "aws",
+      "waregem",
+      "ghent",
+      "belgium"
+    ]
+  },
   "title": "Your Trusted\nIT Solutions Partner",
   "description": "Ocoda empowers businesses by delivering tailored IT consultancy services designed to optimize performance, drive innovation and enhance efficiency."
 }

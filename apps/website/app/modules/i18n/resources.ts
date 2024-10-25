@@ -1,11 +1,11 @@
 import type { Params } from '@remix-run/react';
 import { en } from '../../resources/locales/en';
 import { nl } from '../../resources/locales/nl';
-import type { MetaDescriptor } from '@remix-run/node';
+
+export const supportedLanguages = ['en', 'nl'];
+export type Language = string & (typeof supportedLanguages)[number];
 
 const defaultLanguage = 'en';
-export const supportedLanguages = ['en', 'nl'];
-export type Language = (typeof supportedLanguages)[number];
 
 export type Resource = {
   common: typeof en.common;
@@ -44,12 +44,4 @@ export function ensureLocalizedURL(url: string, language?: Language): string {
   }
 
   return `/${parts.join('/')}`;
-}
-
-export function getLocaleMetaTags(url: string): MetaDescriptor[] {
-  return supportedLanguages.map((lng) => ({
-    rel: 'alternate',
-    hrefLang: lng,
-    href: ensureLocalizedURL(url, lng),
-  }));
 }

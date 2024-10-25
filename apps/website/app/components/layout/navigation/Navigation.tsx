@@ -8,13 +8,14 @@ import { NavButton } from './NavButton';
 import { LinkButton } from './LinkButton';
 import { MenuButton } from './MenuButton';
 import { LanguageSelector } from './LanguageSelector';
-import { useTranslation } from 'react-i18next';
 import { ensureLocalizedURL } from '~/modules/i18n/resources';
 import { useClickOutside } from '~/utils/use-click-outside';
+import { useTranslation } from 'react-i18next';
 
 export const NavBar: FC = () => {
+  const { t, i18n } = useTranslation('common', { keyPrefix: 'nav' });
+
   const ref = useRef(null);
-  const { i18n } = useTranslation();
   const [offset, setOffset] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -25,10 +26,10 @@ export const NavBar: FC = () => {
 
   const websiteLinks = useMemo(
     () => [
-      { url: ensureLocalizedURL('/', i18n.language), copy: 'Home' },
-      { url: ensureLocalizedURL('/dries', i18n.language), copy: 'Meet Dries' },
+      { url: ensureLocalizedURL('/', i18n.language), copy: t('home') },
+      { url: ensureLocalizedURL('/dries', i18n.language), copy: t('dries') },
     ],
-    [i18n.language],
+    [i18n.language, t],
   );
 
   const socialLinks = useMemo(
