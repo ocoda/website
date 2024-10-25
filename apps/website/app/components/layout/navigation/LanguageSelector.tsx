@@ -31,7 +31,7 @@ export const LanguageSelector: FC = () => {
         <ChevronDownIcon className="w-5 h-5 transition-transform group-hover:animate-bounce" />
         <div
           data-menu-open={menuOpen}
-          className="top-[80%] right-5 z-10 absolute border-2 hidden data-[menu-open=true]:grid bg-white shadow-md border-red-600 rounded-md w-24 text-black-950 overflow-hidden"
+          className="top-[80%] right-5 z-10 absolute hidden data-[menu-open=true]:grid bg-white shadow-md rounded-md ring-2 ring-red-600 ring-inset w-24 text-black-950 overflow-hidden"
         >
           {supportedLanguages.map((lng) => (
             <Link
