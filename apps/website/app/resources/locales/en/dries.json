@@ -15,5 +15,249 @@
       "ghent",
       "belgium"
     ]
+  },
+  "title": {
+    "pre": "Hi, I'm",
+    "main": "Dries Hooghe"
+  },
+  "info": {
+    "location": "Waregem, BE",
+    "email": "dries.hooghe@gmail.com",
+    "linkedin": "linkedin.com/in/drieshooghe",
+    "github": "github.com/drieshooghe"
+  },
+  "introduction": "A software engineer specializing in web development and cloud engineering since 2017. With a strong foundation in both front-end and back-end technologies, I bring a versatile approach to building robust, scalable applications that align with your goals. I'm passionate about using my skills to create impactful digital experiences and streamline cloud deployments.",
+  "expertise": {
+    "title": "Expertise",
+    "items": [
+      "Backend Development",
+      "DevOps & Cloud Engineering",
+      "Continuous Integration & Deployment",
+      "Domain Driven Design"
+    ]
+  },
+  "experience": {
+    "title": {
+      "short": "Highlighted Experience",
+      "full": "Full Experience"
+    },
+    "items": [
+      {
+        "company": "Cheqroom",
+        "role": "Senior software engineer",
+        "period": "Jan '23 - present",
+        "location": "Ghent, BE",
+        "description": "In addition to contributing to the continuous enhancement of Cheqroom's services, I took the lead in managing Cheqroom's cloud environment with a focus on architecture, security, cost optimization, and deployment strategies, ensuring high performance and scalability."
+      },
+      {
+        "company": "Cheqroom",
+        "role": "Software engineer",
+        "period": "Feb '19 - Jan '23",
+        "location": "Ghent, BE",
+        "description": "Developed a new backend solution leveraging Event Sourcing and Domain-Driven Design within a microservice architecture using NestJS and Apollo Federation (GraphQL). Transitioned the cloud infrastructure to Infrastructure as Code (IaC) using AWS CDK and aligned it with AWS' Well-Architected Framework, substantially improving reliability and efficiency."
+      },
+      {
+        "company": "Meditech",
+        "role": "Backend web developer",
+        "period": "Jul '18 - Feb '19",
+        "location": "Izegem, BE",
+        "description": "At Meditech I maintained and enhanced the CMS platform (PHP) supporting the MT.Vision, a Digital Signage solution for pharmacies.\nI also contributed to the development of the MT.Matic (Node.JS) - a digital wall dispenser for pharmaceuticals - and the WebSocket communication layer between the dispenser and the backend."
+      },
+      {
+        "company": "DAS Media",
+        "role": "Full-stack web developer",
+        "period": "Oct '17 - Jun '18",
+        "location": "Waregem, BE",
+        "description": "I was hired after my internship as a full-stack developer, contributing to both backend and frontend projects. During this time we transitioned from Laravel to CraftCMS to provide a better end-user experience for our clients."
+      },
+      {
+        "company": "DAS Media",
+        "role": "Web development internship",
+        "period": "Aug '17 - Oct '18",
+        "location": "Waregem, BE",
+        "description": "During my internship at DAS Media, I was tasked with building websites using the LAMP stack (Laravel) for various customers in the B2C sector."
+      }
+    ]
+  },
+  "skills": {
+    "title": "Skills",
+    "description": "A non-exhaustive list of technologies and tools I enjoy using on a daily basis.",
+    "items": [
+      {
+        "category": "Backend",
+        "tools": [
+          {
+            "name": "Node.js",
+            "logo": "nodejs"
+          },
+          {
+            "name": "NestJS",
+            "logo": "nestjs"
+          },
+          {
+            "name": "GraphQL",
+            "logo": "graphql"
+          },
+          {
+            "name": "Apollo Federation",
+            "logo": "apollo"
+          }
+        ]
+      },
+      {
+        "category": "Frontend",
+        "tools": [
+          {
+            "name": "React.js",
+            "logo": "react"
+          },
+          {
+            "name": "Next.js",
+            "logo": "next"
+          },
+          {
+            "name": "Remix.run",
+            "logo": "next"
+          },
+          {
+            "name": "Tailwind CSS",
+            "logo": "tailwindcss"
+          }
+        ]
+      },
+      {
+        "category": "Cloud & DevOps",
+        "tools": [
+          {
+            "name": "AWS",
+            "logo": "aws"
+          },
+          {
+            "name": "Docker",
+            "logo": "docker"
+          },
+          {
+            "name": "Github Actions",
+            "logo": "github"
+          },
+          {
+            "name": "CircleCI",
+            "logo": "circleci"
+          }
+        ]
+      },
+      {
+        "category": "Databases",
+        "tools": [
+          {
+            "name": "MongoDB",
+            "logo": "mongodb"
+          },
+          {
+            "name": "PostgreSQL",
+            "logo": "postgresql"
+          }
+        ]
+      },
+      {
+        "category": "Monitoring & Observability",
+        "tools": [
+          {
+            "name": "Sentry",
+            "logo": "sentry"
+          },
+          {
+            "name": "Cloudwatch",
+            "logo": "cloudwatch"
+          }
+        ]
+      },
+      {
+        "category": "Programming languages",
+        "tools": [
+          {
+            "name": "Typescript",
+            "logo": "typescript"
+          },
+          {
+            "name": "Python",
+            "logo": "python"
+          }
+        ]
+      },
+      {
+        "category": "Misc",
+        "tools": [
+          {
+            "name": "UNIX",
+            "logo": "unix"
+          },
+          {
+            "name": "Git",
+            "logo": "git"
+          }
+        ]
+      }
+    ]
+  },
+  "interests": {
+    "title": "Interests",
+    "items": ["Road cyling", "Badminton & Padel", "Fantasy books", "Rust"]
+  },
+  "education": {
+    "title": "Education & Certifications",
+    "items": [
+      {
+        "title": "Certified Cloud Practitioner",
+        "type": "Exam",
+        "organization": "AWS",
+        "date": "Mar '24"
+      },
+      {
+        "title": "Architecting on AWS",
+        "type": "Course",
+        "organization": "AWS",
+        "date": "Dec '23"
+      },
+      {
+        "title": "AWS Technical Essentials",
+        "type": "Course",
+        "organization": "AWS",
+        "date": "Dec '23"
+      },
+      {
+        "title": "AWS Cloud Practitioner Essentials",
+        "type": "Course",
+        "organization": "AWS",
+        "date": "Nov '23"
+      },
+      {
+        "title": "Bachelor of Social Work",
+        "type": "Studies",
+        "organization": "Artevelde Hogeschool Ghent",
+        "date": "Jun '14"
+      }
+    ]
+  },
+  "projects": {
+    "title": "Projects",
+    "pre_technologies": "Technologies used:",
+    "items": [
+      {
+        "title": "@ocoda/event-sourcing",
+        "description": "An open-source library to help people get started with event-sourcing and CQRS in NestJS, with support for MongoDB and DynamoDB as an event-store.",
+        "technologies": ["Node.js", "NestJS", "MongoDB", "DynamoDB", "CircleCI"],
+        "link": "https://github.com/ocoda/event-sourcing"
+      },
+      {
+        "title": "This resume",
+        "description": "A statically generated website using NextJS and Tailwind CSS, hosted on AWS.",
+        "technologies": ["React", "Tailwind CSS", "AWS"],
+        "link": "https://github.com/drieshooghe/about"
+      }
+    ]
+  },
+  "cta": {
+    "title": "Let's talk!"
   }
 }
