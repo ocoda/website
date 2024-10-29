@@ -18,13 +18,17 @@ export const Footer: FC = () => {
             VAT: <span className="text-nowrap">BE 0123.456.7890</span>
           </span>
         </div>
-        <div className="flex flex-col items-end gap-2">
+        <div className="flex flex-col items-end gap-2 text-end">
           <Link to={ensureLocalizedURL('/terms-and-conditions', i18n.language)}>{t('terms')}</Link>
           <Link to={ensureLocalizedURL('/privacy-policy', i18n.language)}>{t('privacy')}</Link>
           <span>
             Illustrations from{' '}
             <Link to={'https://www.reshot.com'} target="_blank">
               Reshot
+            </Link>{' '}
+            &{' '}
+            <Link to={'https://www.getillustrations.com'} target="_blank">
+              GetIllustrations
             </Link>
           </span>
           <span>© {new Date().getFullYear()} Ocoda BV</span>
