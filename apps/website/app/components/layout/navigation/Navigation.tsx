@@ -1,9 +1,9 @@
 import { Link } from '@remix-run/react';
 import { useEffect, useMemo, useRef, useState, type FC } from 'react';
-import { GithubIcon } from '~/icons/Github';
-import { LinkedInIcon } from '~/icons/LinkedIn';
-import { OcodaIcon } from '~/icons/Ocoda';
-import { MailIcon } from '~/icons/Mail';
+import { GithubIcon } from '~/components/icons/Github';
+import { LinkedInIcon } from '~/components/icons/LinkedIn';
+import { OcodaIcon } from '~/components/icons/Ocoda';
+import { MailIcon } from '~/components/icons/Mail';
 import { NavButton } from './NavButton';
 import { LinkButton } from './LinkButton';
 import { MenuButton } from './MenuButton';
