@@ -1,16 +1,13 @@
 import { Link } from '@remix-run/react';
 import { useEffect, useMemo, useRef, useState, type FC } from 'react';
-import { GithubIcon } from '~/components/icons/Github';
-import { LinkedInIcon } from '~/components/icons/LinkedIn';
-import { OcodaIcon } from '~/components/icons/Ocoda';
-import { MailIcon } from '~/components/icons/Mail';
-import { NavButton } from './NavButton';
-import { LinkButton } from './LinkButton';
-import { MenuButton } from './MenuButton';
-import { LanguageSelector } from './LanguageSelector';
+import { useTranslation } from 'react-i18next';
+import { GithubIcon, LinkedInIcon, MailIcon, OcodaIcon } from '~/components/icons';
 import { ensureLocalizedURL } from '~/modules/i18n/resources';
 import { useClickOutside } from '~/utils/use-click-outside';
-import { useTranslation } from 'react-i18next';
+import { LanguageSelector } from './LanguageSelector';
+import { LinkButton } from './LinkButton';
+import { MenuButton } from './MenuButton';
+import { NavButton } from './NavButton';
 
 export const NavBar: FC = () => {
   const { t, i18n } = useTranslation('common', { keyPrefix: 'nav' });

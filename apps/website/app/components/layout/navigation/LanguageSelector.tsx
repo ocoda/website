@@ -2,9 +2,8 @@ import { Link, useLocation } from '@remix-run/react';
 import { useRef, useState, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useChangeLanguage } from 'remix-i18next/react';
-import { ChevronDownIcon } from '~/components/icons/ChevronDown';
-import { ensureLocalizedURL } from '~/modules/i18n/resources';
-import { supportedLanguages } from '~/modules/i18n/resources';
+import { ChevronDownIcon } from '~/components/icons';
+import { ensureLocalizedURL, supportedLanguages } from '~/modules/i18n/resources';
 import { useClickOutside } from '~/utils/use-click-outside';
 
 export const LanguageSelector: FC = () => {
