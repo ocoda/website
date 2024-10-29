@@ -1,7 +1,7 @@
 import { NavLink } from '@remix-run/react';
 import type { FC } from 'react';
 
-import notFoundImage from '~/assets/images/404.gif';
+import notFoundImage from '~/resources/assets/images/404.gif';
 
 interface Props {
   error: unknown;

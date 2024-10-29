@@ -4,16 +4,15 @@ import { i18n } from '~/modules/i18n/i18n.server';
 import { useLoaderData } from '@remix-run/react';
 import { getDefaultMetaTags, getLocaleMetaTags, getPageMetaTags, type PageMetadata } from '~/modules/meta';
 
-// Consolidate illustrations into a single object for easy access
-import cloudComputingIllustration from '~/assets/illustrations/cloud_computing.svg';
-import cloudComputingExtra1Illustration from '~/assets/illustrations/cloud_computing_extra_1.svg';
-import cloudComputingExtra2Illustration from '~/assets/illustrations/cloud_computing_extra_2.svg';
-import cloudComputingExtra3Illustration from '~/assets/illustrations/cloud_computing_extra_3.svg';
-import cloudSolutionsIllustration from '~/assets/illustrations/cloud_solutions.svg';
-import backendEngineeringIllustration from '~/assets/illustrations/backend_engineering.svg';
-import observabilityIllustration from '~/assets/illustrations/observability.svg';
-import performanceImprovementsIllustration from '~/assets/illustrations/performance_improvements.svg';
-import wavesIllustration from '~/assets/illustrations/waves.svg';
+import cloudComputingIllustration from '~/resources/assets/illustrations/cloud_computing.svg';
+import cloudComputingExtra1Illustration from '~/resources/assets/illustrations/cloud_computing_extra_1.svg';
+import cloudComputingExtra2Illustration from '~/resources/assets/illustrations/cloud_computing_extra_2.svg';
+import cloudComputingExtra3Illustration from '~/resources/assets/illustrations/cloud_computing_extra_3.svg';
+import cloudSolutionsIllustration from '~/resources/assets/illustrations/cloud_solutions.svg';
+import backendEngineeringIllustration from '~/resources/assets/illustrations/backend_engineering.svg';
+import observabilityIllustration from '~/resources/assets/illustrations/observability.svg';
+import performanceImprovementsIllustration from '~/resources/assets/illustrations/performance_improvements.svg';
+import wavesIllustration from '~/resources/assets/illustrations/waves.svg';
 
 export const handle = { i18n: 'home' };
 
