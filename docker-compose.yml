@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  imgproxy:
+    image: darthsim/imgproxy:latest
+    container_name: imgproxy
+    environment:
+      IMGPROXY_BASE_URL: "http://${HOST_DOCKER_INTERNAL:-host.docker.internal}:3000/app/resources/assets/"
+      IMGPROXY_MAX_SRC_RESOLUTION: "megapixels:16"
+      IMGPROXY_AUTO_ROTATE: "true"
+      IMGPROXY_LOG_LEVEL: "info"
+      IMGPROXY_ALLOW_LOOPBACK_SOURCE_ADDRESSES: 1
+    ports:
+      - 8080:8080
+    volumes:
+      - imgproxy:/imgproxy/cache
+    restart: unless-stopped
+
+volumes:
+  imgproxy:
