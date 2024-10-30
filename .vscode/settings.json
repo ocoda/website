@@ -1,9 +1,13 @@
 {
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
+  "editor.insertSpaces": true,
   "editor.codeActionsOnSave": {
-    "source.removeUnusedImports": "explicit",
     "quickfix.biome": "explicit",
-    "source.fixAll.biome": "explicit"
+    "source.organizeImports.biome": "explicit",
+    "source.removeUnusedImports": "explicit"
   },
+  "files.autoSave": "afterDelay",
   "[javascript]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
