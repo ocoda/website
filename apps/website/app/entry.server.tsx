@@ -3,12 +3,12 @@ import { PassThrough } from 'node:stream';
 import type { AppLoadContext, EntryContext } from '@remix-run/node';
 import { createReadableStreamFromReadable } from '@remix-run/node';
 import { RemixServer } from '@remix-run/react';
+import { createInstance, type i18n as i18next } from 'i18next';
 import isbot from 'isbot';
 import { renderToPipeableStream } from 'react-dom/server';
-import { createInstance, type i18n as i18next } from 'i18next';
-import { i18n } from '~/modules/i18n/i18n.server';
-import { i18nConfig } from '~/modules/i18n/config';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
+import { i18nConfig } from '~/modules/i18n/config';
+import { i18n } from '~/modules/i18n/i18n.server';
 import { getLngFromUrl } from '~/modules/i18n/resources';
 
 const ABORT_DELAY = 5_000;

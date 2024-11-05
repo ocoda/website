@@ -1,29 +1,35 @@
 import type { LinksFunction, LoaderFunctionArgs } from '@remix-run/node';
 import {
-  isRouteErrorResponse,
-  json,
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  isRouteErrorResponse,
+  json,
   useLoaderData,
   useRouteError,
 } from '@remix-run/react';
 
-// @ts-ignore
-import styles from './styles/app.css?url';
-import { NavBar } from './components/layout/navigation/Navigation';
-import { Footer } from './components/layout/Footer';
-import { i18n } from '~/modules/i18n/i18n.server';
 import { useTranslation } from 'react-i18next';
 import { useChangeLanguage } from 'remix-i18next/react';
+import { i18n } from '~/modules/i18n/i18n.server';
 import { ensureLocalizedURL, getLngFromParams } from '~/modules/i18n/resources';
 import { NotFoundMessage } from './components/404/NotFoundMessage';
+import Layout from './components/layout/Layout';
+import type { en } from './resources/locales/en';
+// @ts-ignore
+import styles from './styles/app.css?url';
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const locale = getLngFromParams(params) ?? (await i18n.getLocale(request));
-  return json({ locale });
+  const t = await i18n.getFixedT(request, 'common');
+  const copy = {
+    nav: t('nav', { returnObjects: true }),
+    footer: t('footer', { returnObjects: true }),
+  } as typeof en.common;
+
+  return json({ locale, copy });
 };
 
 export const handle = {
@@ -46,7 +52,7 @@ export const links: LinksFunction = () => [
 ];
 
 export default function App() {
-  const { locale } = useLoaderData<typeof loader>();
+  const { locale, copy } = useLoaderData<typeof loader>();
   const { i18n } = useTranslation();
 
   useChangeLanguage(locale);
@@ -60,10 +66,11 @@ export default function App() {
         <Links />
       </head>
       <body className="bg-gradient-to-r from-10% from-white lg:from-0% via-gray-300 to-gray-500 lg:to-gray-600 text-white leading-normal tracking-normal">
-        <NavBar />
-        <Outlet />
+        {/* <NavBar /> */}
+        <Layout lng={locale} copy={copy}>
+          <Outlet />
+        </Layout>
         <ScrollRestoration />
-        <Footer />
         <Scripts />
       </body>
     </html>

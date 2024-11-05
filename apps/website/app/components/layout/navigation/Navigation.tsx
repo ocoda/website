@@ -1,17 +1,20 @@
 import { Link } from '@remix-run/react';
-import { useEffect, useMemo, useRef, useState, type FC } from 'react';
-import { useTranslation } from 'react-i18next';
+import { type FC, useEffect, useMemo, useRef, useState } from 'react';
 import { GithubIcon, LinkedInIcon, MailIcon, OcodaIcon } from '~/components/icons';
-import { ensureLocalizedURL } from '~/modules/i18n/resources';
+import { type Language, ensureLocalizedURL } from '~/modules/i18n/resources';
+import type { en } from '~/resources/locales/en';
 import { useClickOutside } from '~/utils/use-click-outside';
 import { LanguageSelector } from './LanguageSelector';
 import { LinkButton } from './LinkButton';
 import { MenuButton } from './MenuButton';
 import { NavButton } from './NavButton';
 
-export const NavBar: FC = () => {
-  const { t, i18n } = useTranslation('common', { keyPrefix: 'nav' });
+interface Props {
+  lng: Language;
+  copy: (typeof en)['common']['nav'];
+}
 
+export const NavBar: FC<Props> = ({ lng, copy }) => {
   const ref = useRef(null);
   const [offset, setOffset] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,10 +26,10 @@ export const NavBar: FC = () => {
 
   const websiteLinks = useMemo(
     () => [
-      { url: ensureLocalizedURL('/', i18n.language), copy: t('home') },
-      { url: ensureLocalizedURL('/dries', i18n.language), copy: t('dries') },
+      { url: ensureLocalizedURL('/', lng), copy: copy.home },
+      { url: ensureLocalizedURL('/dries', lng), copy: copy.dries },
     ],
-    [i18n.language, t],
+    [lng, copy],
   );
 
   const socialLinks = useMemo(
@@ -55,7 +58,7 @@ export const NavBar: FC = () => {
       <div className="grid grid-cols-[1fr_max-content] mx-auto px-6 py-4 container">
         <div className="flex items-center">
           <Link
-            to={`/${i18n.language}`}
+            to={`/${lng}`}
             className="flex items-center font-display text-2xl lg:text-4xl no-underline hover:no-underline"
           >
             <OcodaIcon width={32} height={32} className="mr-4 text-purple-950" />

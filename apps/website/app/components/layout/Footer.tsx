@@ -1,11 +1,14 @@
-import type { FC } from 'react';
 import { Link } from '@remix-run/react';
-import { ensureLocalizedURL } from '~/modules/i18n/resources';
-import { useTranslation } from 'react-i18next';
+import type { FC } from 'react';
+import { type Language, ensureLocalizedURL } from '~/modules/i18n/resources';
+import type { en } from '~/resources/locales/en';
 
-export const Footer: FC = () => {
-  const { t, i18n } = useTranslation('common', { keyPrefix: 'footer' });
+type Props = {
+  lng: Language;
+  copy: (typeof en)['common']['footer'];
+};
 
+export const Footer: FC<Props> = ({ copy, lng }) => {
   return (
     <footer className="bg-white border-t text-gray-500 text-xs md:text-sm">
       <div className="items-center gap-1 md:gap-2 grid grid-cols-2 mx-auto px-8 py-8 container">
@@ -19,8 +22,8 @@ export const Footer: FC = () => {
           </span>
         </div>
         <div className="flex flex-col items-end gap-2 text-end">
-          <Link to={ensureLocalizedURL('/terms-and-conditions', i18n.language)}>{t('terms')}</Link>
-          <Link to={ensureLocalizedURL('/privacy-policy', i18n.language)}>{t('privacy')}</Link>
+          <Link to={ensureLocalizedURL('/terms-and-conditions', lng)}>{copy.terms}</Link>
+          <Link to={ensureLocalizedURL('/privacy-policy', lng)}>{copy.privacy}</Link>
           <span>
             Illustrations from{' '}
             <Link to={'https://www.reshot.com'} target="_blank">
