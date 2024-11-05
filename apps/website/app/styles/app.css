@@ -26,3 +26,7 @@
 .bg-ocoda-gradient-inverse {
   background-image: var(--ocoda-gradient-inverse);
 }
+
+.image-border-white {
+  filter: drop-shadow(5px 0 0 white) drop-shadow(0 5px 0 white) drop-shadow(-5px 0 0 white) drop-shadow(0 -5px 0 white);
+}
