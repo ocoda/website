@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const generateImgSrc = ({ src, options }: Props): string => {
-  const endpoint = 'https://ocodacdn.dev/image';
+  const endpoint = `${process.env.CDN_URL}/image`;
   return generateImageUrl({
     endpoint,
     url: { value: `website://${src}` },
