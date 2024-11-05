@@ -20,6 +20,9 @@ importers:
 
   apps/website:
     dependencies:
+      '@imgproxy/imgproxy-node':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@next-boost/hybrid-disk-cache':
         specifier: ^0.2.1
         version: 0.2.1
@@ -66,6 +69,9 @@ importers:
       '@biomejs/biome':
         specifier: 1.9.3
         version: 1.9.3
+      '@imgproxy/imgproxy-js-core':
+        specifier: ^1.0.8
+        version: 1.0.8
       '@ocoda/website-config':
         specifier: workspace:*
         version: link:../../packages/config
@@ -730,6 +736,12 @@ packages:
     engines: {node: '>=12'}
     cpu: [x64]
     os: [win32]
+
+  '@imgproxy/imgproxy-js-core@1.0.8':
+    resolution: {integrity: sha512-3oBneumj7b/YCeyLteKyKaidQSrDhEHnZMiVBHO0Hshju/YSplbzSeACZGwai7LyD3YMMpsK/kLIodXU6wbtMw==}
+
+  '@imgproxy/imgproxy-node@1.0.6':
+    resolution: {integrity: sha512-Evdg3Ywry4RzIKTtQnHO3KsSKHa000GcdY4nRM2JRNdAgATv7fBD82nj6qzTgcqxpqcywnT1Sd2XGxxVg7ZC+w==}
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -3669,6 +3681,12 @@ snapshots:
 
   '@esbuild/win32-x64@0.21.5':
     optional: true
+
+  '@imgproxy/imgproxy-js-core@1.0.8': {}
+
+  '@imgproxy/imgproxy-node@1.0.6':
+    dependencies:
+      '@imgproxy/imgproxy-js-core': 1.0.8
 
   '@isaacs/cliui@8.0.2':
     dependencies:

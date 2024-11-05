@@ -14,6 +14,7 @@
   "author": "Dries Hooghe <dries@ocoda.be>",
   "license": "ISC",
   "dependencies": {
+    "@imgproxy/imgproxy-node": "^1.0.6",
     "@next-boost/hybrid-disk-cache": "^0.2.1",
     "@remix-run/node": "^2.0.1",
     "@remix-run/react": "^2.0.1",
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.3",
+    "@imgproxy/imgproxy-js-core": "^1.0.8",
     "@ocoda/website-config": "workspace:*",
     "@remix-run/dev": "^2.13.1",
     "@remix-run/server-runtime": "^2.0.1",
