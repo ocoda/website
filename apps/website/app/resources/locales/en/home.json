@@ -28,19 +28,31 @@
     "items": {
       "cloud": {
         "title": "Cloud Solutions",
-        "description": "With Amazon Web Services, we design and implement cloud infrastructure solutions that are tailored to meet your scalability, resilience, and cost goals. From CI/CD pipelines for smoother development to containerization for flexibility, we help enable secure, seamless deployments across various environments."
+        "description": "With Amazon Web Services, we design and implement cloud infrastructure solutions that are tailored to meet your scalability, resilience, and cost goals. From CI/CD pipelines for smoother development to containerization for flexibility, we help enable secure, seamless deployments across various environments.",
+        "image": {
+          "alt": "A man stacking cubes"
+        }
       },
       "backend": {
         "title": "Backend Engineering",
-        "description": "We focus on building reliable and scalable backend systems that support your applications' needs. Whether it's developing APIs or handling complex integrations, we aim to provide backend solutions that contribute to a responsive, smooth user experience across all platforms."
+        "description": "We focus on building reliable and scalable backend systems that support your applications' needs. Whether it's developing APIs or handling complex integrations, we aim to provide backend solutions that contribute to a responsive, smooth user experience across all platforms.",
+        "image": {
+          "alt": "A man typing on his laptop"
+        }
       },
       "observability": {
         "title": "Observability & Monitoring",
-        "description": "Our monitoring and observability solutions are designed to give you valuable insights into your applications and infrastructure in real time. Using modern monitoring tools, we help identify and resolve issues early to maintain stability and performance."
+        "description": "Our monitoring and observability solutions are designed to give you valuable insights into your applications and infrastructure in real time. Using modern monitoring tools, we help identify and resolve issues early to maintain stability and performance.",
+        "image": {
+          "alt": "A woman monitoring a dashboard"
+        }
       },
       "performance": {
         "title": "Performance Optimization",
-        "description": "We carefully analyze and implement improvements in code, infrastructure, and architecture to increase speed, reduce latency, and improve overall efficiency. These optimizations help ensure that your systems stay responsive, scalable, and ready for growth."
+        "description": "We carefully analyze and implement improvements in code, infrastructure, and architecture to increase speed, reduce latency, and improve overall efficiency. These optimizations help ensure that your systems stay responsive, scalable, and ready for growth.",
+        "image": {
+          "alt": "A woman coming up with an idea"
+        }
       }
     }
   }

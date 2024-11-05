@@ -1,18 +1,11 @@
-import { json, type LoaderFunctionArgs, type MetaFunction } from '@remix-run/node';
+import { type LoaderFunctionArgs, type MetaFunction, json } from '@remix-run/node';
 import { i18n } from '~/modules/i18n/i18n.server';
 
 import { useLoaderData } from '@remix-run/react';
-import { getDefaultMetaTags, getLocaleMetaTags, getPageMetaTags, type PageMetadata } from '~/modules/meta';
+import { type PageMetadata, getDefaultMetaTags, getLocaleMetaTags, getPageMetaTags } from '~/modules/meta';
+import type { en } from '~/resources/locales/en';
 
-import cloudComputingIllustration from '~/resources/assets/illustrations/cloud_computing.svg';
-import cloudComputingExtra1Illustration from '~/resources/assets/illustrations/cloud_computing_extra_1.svg';
-import cloudComputingExtra2Illustration from '~/resources/assets/illustrations/cloud_computing_extra_2.svg';
-import cloudComputingExtra3Illustration from '~/resources/assets/illustrations/cloud_computing_extra_3.svg';
-import cloudSolutionsIllustration from '~/resources/assets/illustrations/cloud_solutions.svg';
-import backendEngineeringIllustration from '~/resources/assets/illustrations/backend_engineering.svg';
-import observabilityIllustration from '~/resources/assets/illustrations/observability.svg';
-import performanceImprovementsIllustration from '~/resources/assets/illustrations/performance_improvements.svg';
-import wavesIllustration from '~/resources/assets/illustrations/waves.svg';
+import { Img } from '~/components/img';
 
 export const handle = { i18n: 'home' };
 
@@ -22,10 +15,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     meta: t('meta', { returnObjects: true }) as PageMetadata,
     title: t('title'),
     description: t('description'),
-    services: t('services', { returnObjects: true }) as {
-      title: string;
-      items: Record<string, { title: string; description: string }>;
-    },
+    services: t('services', { returnObjects: true }) as (typeof en)['home']['services'],
   });
 }
 
@@ -35,15 +25,16 @@ export const meta: MetaFunction<typeof loader> = ({ data, location }) => {
 
 interface ServiceCardProps {
   image: string;
+  imageAlt: string;
   title: string;
   description: string;
   reverse?: boolean;
 }
 
-function ServiceCard({ image, title, description }: ServiceCardProps) {
+function ServiceCard({ image, imageAlt, title, description }: ServiceCardProps) {
   return (
     <div className="even:md:text-right items-center grid md:grid-cols-2 odd:md:text-left group">
-      <img className="group-odd:md:order-last mx-auto p-6 w-64" src={image} alt={title} loading="lazy" />
+      <Img src={image} alt={imageAlt} className="group-odd:md:order-last mx-auto p-6 w-64" />
       <div className="p-6">
         <h3 className="mb-3 font-bold text-2xl text-gray-800 lg:text-3xl leading-none">{title}</h3>
         <p className="text-gray-600">{description}</p>
@@ -64,37 +55,29 @@ export default function Index() {
             <p className="text-lg lg:text-2xl leading-normal">{description}</p>
           </div>
           <div className="relative mx-auto w-4/5 lg:w-3/5 text-center">
-            <img
-              className="relative z-20 w-full"
-              src={cloudComputingIllustration}
-              alt="People monitoring statistics"
-              loading="lazy"
-            />
-            <img
-              className="top-0 left-0 -z-10 absolute w-full animate-float-vertical"
-              src={cloudComputingExtra1Illustration}
+            <Img src="cloud_computing.svg" alt="People monitoring statistics" className="relative z-20 w-full" />
+            <Img
+              src="cloud_computing_extra_1.svg"
               alt="A cloud"
-              loading="lazy"
+              className="top-0 left-0 -z-10 absolute w-full animate-float-vertical"
             />
-            <img
-              className="top-0 right-0 bottom-0 left-0 -z-10 absolute w-full animate-float-depth"
-              src={cloudComputingExtra2Illustration}
+            <Img
+              src="cloud_computing_extra_2.svg"
               alt="A monitor"
-              loading="lazy"
+              className="top-0 right-0 bottom-0 left-0 -z-10 absolute w-full animate-float-depth"
             />
-            <img
+            <Img
+              src="cloud_computing_extra_3.svg"
+              alt="A monitor"
               className="right-0 bottom-0 -z-10 absolute w-full animate-float-depth"
               style={{ animationDelay: '0.8s' }}
-              src={cloudComputingExtra3Illustration}
-              alt="Another monitor"
-              loading="lazy"
             />
           </div>
         </div>
       </header>
 
       <div className="relative z-20 -mt-4 lg:-mt-18 -mb-[1px]">
-        <img className="w-full" src={wavesIllustration} alt="Waves" />
+        <Img src="waves.svg" alt="Waves" className="w-full" />
       </div>
 
       <section className="bg-white py-8">
@@ -105,23 +88,27 @@ export default function Index() {
           <div className="bg-ocoda-gradient opacity-25 mx-auto mb-4 rounded-t w-2/5 h-1 gradient" />
           <div className="flex flex-col gap-8 p-4 lg:p-0 text-center">
             <ServiceCard
-              image={cloudSolutionsIllustration}
+              image="cloud_solutions.svg"
+              imageAlt={services.items.cloud.image.alt}
               title={services.items.cloud.title}
               description={services.items.cloud.description}
             />
             <ServiceCard
-              image={backendEngineeringIllustration}
+              image="backend_engineering.svg"
+              imageAlt={services.items.backend.image.alt}
               title={services.items.backend.title}
               description={services.items.backend.description}
               reverse
             />
             <ServiceCard
-              image={observabilityIllustration}
+              image="observability.svg"
+              imageAlt={services.items.observability.image.alt}
               title={services.items.observability.title}
               description={services.items.observability.description}
             />
             <ServiceCard
-              image={performanceImprovementsIllustration}
+              image="performance_improvements.svg"
+              imageAlt={services.items.performance.image.alt}
               title={services.items.performance.title}
               description={services.items.performance.description}
               reverse
@@ -131,7 +118,7 @@ export default function Index() {
       </section>
 
       <section className="w-full h-60">
-        <img className="-mt-px w-full" style={{ transform: 'scale(-1, -1)' }} src={wavesIllustration} alt="Waves" />
+        <Img src="waves.svg" alt="Waves" className="-mt-px w-full" style={{ transform: 'scale(-1, -1)' }} />
       </section>
     </>
   );

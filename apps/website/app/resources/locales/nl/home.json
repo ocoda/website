@@ -28,19 +28,31 @@
     "items": {
       "cloud": {
         "title": "Cloud Oplossingen",
-        "description": "Met Amazon Web Services ontwerpen en implementeren we cloud infrastructuren die afgestemd zijn op uw behoeften aan schaalbaarheid, veerkracht en kosten. Van CI/CD-pijplijnen voor efficiëntere ontwikkeling tot containerisatie voor flexibiliteit, we helpen bij het realiseren van veilige en naadloze implementaties in verschillende omgevingen."
+        "description": "Met Amazon Web Services ontwerpen en implementeren we cloud infrastructuren die afgestemd zijn op uw behoeften aan schaalbaarheid, veerkracht en kosten. Van CI/CD-pijplijnen voor efficiëntere ontwikkeling tot containerisatie voor flexibiliteit, we helpen bij het realiseren van veilige en naadloze implementaties in verschillende omgevingen.",
+        "image": {
+          "alt": "Een man die blokken stapelt"
+        }
       },
       "backend": {
         "title": "Backend Engineering",
-        "description": "Wij richten ons op het bouwen van betrouwbare en schaalbare backendsystemen die aansluiten op de behoeften van uw applicaties. Of het nu gaat om API-ontwikkeling of complexe integraties, we streven ernaar backend-oplossingen te bieden die bijdragen aan een soepele en responsieve gebruikerservaring op alle platforms."
+        "description": "Wij richten ons op het bouwen van betrouwbare en schaalbare backendsystemen die aansluiten op de behoeften van uw applicaties. Of het nu gaat om API-ontwikkeling of complexe integraties, we streven ernaar backend-oplossingen te bieden die bijdragen aan een soepele en responsieve gebruikerservaring op alle platforms.",
+        "image": {
+          "alt": "Een man die typt op zijn laptop"
+        }
       },
       "observability": {
         "title": "Observability & Monitoring",
-        "description": "Onze monitoring- en observability-oplossingen zijn ontworpen om u waardevolle inzichten in uw applicaties en infrastructuur te geven in real-time. Door gebruik te maken van moderne monitoringtools, helpen we problemen vroegtijdig op te sporen en op te lossen om stabiliteit en prestaties te behouden."
+        "description": "Onze monitoring- en observability-oplossingen zijn ontworpen om u waardevolle inzichten in uw applicaties en infrastructuur te geven in real-time. Door gebruik te maken van moderne monitoringtools, helpen we problemen vroegtijdig op te sporen en op te lossen om stabiliteit en prestaties te behouden.",
+        "image": {
+          "alt": "Een vrouw die een dashboard monitort"
+        }
       },
       "performance": {
         "title": "Prestatieoptimalisatie",
-        "description": "We analyseren en implementeren zorgvuldige verbeteringen in code, infrastructuur en architectuur om snelheid te verhogen, latency te verminderen en de algehele efficiëntie te verbeteren. Deze optimalisaties zorgen ervoor dat uw systemen responsief, schaalbaar en klaar voor groei blijven."
+        "description": "We analyseren en implementeren zorgvuldige verbeteringen in code, infrastructuur en architectuur om snelheid te verhogen, latency te verminderen en de algehele efficiëntie te verbeteren. Deze optimalisaties zorgen ervoor dat uw systemen responsief, schaalbaar en klaar voor groei blijven.",
+        "image": {
+          "alt": "Een vrouw die een idee krijgt"
+        }
       }
     }
   }
