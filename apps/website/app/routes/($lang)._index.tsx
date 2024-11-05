@@ -10,6 +10,7 @@ export const handle = { i18n: 'home' };
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const t = await i18n.getFixedT(request, 'home');
+
   return json({
     meta: t('meta', { returnObjects: true }) as PageMetadata,
     copy: {
