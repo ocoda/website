@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { FC, HTMLProps } from 'react';
 
 interface Props {
   images: {
@@ -7,11 +7,9 @@ interface Props {
   };
 }
 
-export const Avatar: FC<Props> = ({ images }) => {
+export const Avatar: FC<Props & HTMLProps<HTMLDivElement>> = ({ images, ...rest }) => {
   return (
-    <div className="relative image-border-white w-40 lg:w-56 print:w-32">
-      {/* biome-ignore lint/a11y/useAltText: Background image */}
-      <img src={images.bg} className="top-0 left-0 z-0 absolute" />
+    <div {...rest}>
       <picture className="relative z-10">
         <source
           media="(max-width: 1023px)"
@@ -21,6 +19,8 @@ export const Avatar: FC<Props> = ({ images }) => {
           src={images.fg.lg[1]}
           srcSet={`${images.fg.lg[1]} 1x, ${images.fg.lg[2]} 2x, ${images.fg.lg[3]} 3x`}
           alt="Avatar Dries Hooghe"
+          style={{ backgroundImage: `url(${images.bg})` }}
+          className="bg-cover bg-no-repeat"
         />
       </picture>
     </div>
