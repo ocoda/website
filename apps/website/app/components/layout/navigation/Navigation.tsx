@@ -34,9 +34,9 @@ export const NavBar: FC<Props> = ({ lng, copy }) => {
 
   const socialLinks = useMemo(
     () => [
-      { url: 'https://github.com/ocoda', icon: <GithubIcon /> },
-      { url: 'https://www.linkedin.com/company/ocoda', icon: <LinkedInIcon /> },
-      { url: 'mailto:hello@ocoda.be?subject=Hello%20Dries!', icon: <MailIcon /> },
+      { title: 'GitHub', url: 'https://github.com/ocoda', icon: <GithubIcon /> },
+      { title: 'LinkedIn', url: 'https://www.linkedin.com/company/ocoda', icon: <LinkedInIcon /> },
+      { title: 'Mail', url: 'mailto:hello@ocoda.be?subject=Hello%20Dries!', icon: <MailIcon /> },
     ],
     [],
   );
@@ -91,9 +91,9 @@ export const NavBar: FC<Props> = ({ lng, copy }) => {
             data-menu-open={menuOpen}
             className="text-right lg:flex justify-end items-center hidden data-[menu-open=true]:grid data-[menu-open=true]:grid-flow-col text-lg"
           >
-            {socialLinks.map(({ url, icon }) => (
+            {socialLinks.map(({ title, url, icon }) => (
               <li key={url}>
-                <LinkButton to={url} icon={icon} />
+                <LinkButton title={title} to={url} icon={icon} />
               </li>
             ))}
           </ul>
