@@ -1,8 +1,10 @@
 import { type LoaderFunctionArgs, type MetaFunction, json } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
+import { NavLink, useLoaderData } from '@remix-run/react';
 import { Avatar } from '~/components/avatar/Avatar';
 import Paragraph from '~/components/paragraph/Paragraph';
 import SectionTitle from '~/components/section/SectionTitle';
+import { Skills } from '~/components/skills/Skills';
+import { getToolIcon } from '~/components/skills/ToolBadge';
 import { Timeline } from '~/components/timeline/Timeline';
 import { i18n } from '~/modules/i18n/i18n.server';
 import { type PageMetadata, getDefaultMetaTags, getLocaleMetaTags, getPageMetaTags } from '~/modules/meta';
@@ -16,17 +18,15 @@ export async function loader({ request }: LoaderFunctionArgs) {
   return json({
     meta: t('meta', { returnObjects: true }) as PageMetadata,
     copy: {
-      title: {
-        pre: t('title.pre'),
-        main: t('title.main'),
-      },
-      info: {
-        location: t('info.location'),
-      },
-      introduction: t('introduction'),
+      title: t('title', { returnObjects: true }) as (typeof en)['dries']['title'],
+      info: t('info', { returnObjects: true }) as (typeof en)['dries']['info'],
+      introduction: t('introduction') as (typeof en)['dries']['introduction'],
       expertise: t('expertise', { returnObjects: true }) as (typeof en)['dries']['expertise'],
       experience: t('experience', { returnObjects: true }) as (typeof en)['dries']['experience'],
       skills: t('skills', { returnObjects: true }) as (typeof en)['dries']['skills'],
+      education: t('education', { returnObjects: true }) as (typeof en)['dries']['education'],
+      interests: t('interests', { returnObjects: true }) as (typeof en)['dries']['interests'],
+      projects: t('projects', { returnObjects: true }) as (typeof en)['dries']['projects'],
     },
     images: {
       waves: generateImgSrc({ src: 'waves.svg' }),
@@ -80,9 +80,9 @@ export default function Dries() {
               {copy.introduction}
             </Paragraph>
           </div>
-          <div className="gap-8 print:gap-6 grid grid-cols-1 sm:grid-cols-2">
+          <div className="gap-8 print:gap-6 grid grid-cols-1 md:grid-cols-2">
             {/** Expertise */}
-            <section className="gap-y-2 order-1 print:order-3 sm:order-2 grid auto-rows-min break-inside-avoid">
+            <section className="gap-y-2 order-1 md:order-2 print:order-3 grid auto-rows-min break-inside-avoid">
               <SectionTitle>{copy.expertise.title}</SectionTitle>
               <ul>
                 {copy.expertise.items.map((item) => (
@@ -92,87 +92,67 @@ export default function Dries() {
                 ))}
               </ul>
             </section>
+            {/** Interests */}
+            <section className="gap-y-2 order-5 md:order-3 print:order-4 grid auto-rows-min break-inside-avoid">
+              <SectionTitle>{copy.interests.title}</SectionTitle>
+              <ul>
+                {copy.interests.items.map((item) => (
+                  <li key={item} className="my-2">
+                    <Paragraph weight="extralight">{item}</Paragraph>
+                  </li>
+                ))}
+              </ul>
+            </section>
             {/** Highlighted experience */}
-            <section className="gap-y-2 order-2 sm:order-1 print:hidden grid auto-rows-min mb-4 break-inside-avoid">
+            <section className="gap-y-2 order-2 md:order-1 print:hidden grid md:row-span-2 auto-rows-min mb-4 break-inside-avoid">
               <SectionTitle>{copy.experience.title.short}</SectionTitle>
               <Timeline experience={copy.experience} />
             </section>
             {/** Skills */}
-            <section className="gap-y-2 order-3 md:order-2 print:order-1 grid auto-rows-min break-inside-avoid">
+            <section className="gap-y-2 order-3 md:order-3 print:order-1 grid md:col-span-2 auto-rows-min break-inside-avoid">
               <SectionTitle>{copy.skills.title}</SectionTitle>
-              <Paragraph size="medium" weight="light">
+              <Paragraph size="medium" weight="light" className="mb-2">
                 {copy.skills.description}
               </Paragraph>
-              <div className="gap-2.5 grid md:grid-cols-2">
-                {copy.skills.items.map(({ category, tools }) => {
-                  return (
-                    <div key={category} className="flex flex-col gap-2">
-                      <Paragraph size="medium" weight="normal">
-                        {category}
-                      </Paragraph>
-                      <ul className="flex flex-wrap gap-1">
-                        {tools.map((tool) => (
-                          <li key={tool.name}>
-                            <Paragraph
-                              weight="extralight"
-                              size="small"
-                              className="px-2 py-0.5 border rounded-lg whitespace-nowrap"
-                            >
-                              {tool.name}
-                            </Paragraph>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  );
-                })}
-              </div>
+              <Skills skills={copy.skills.items} />
             </section>
             {/** Education & Certifications */}
-            {/* <section className="gap-y-2 order-4 print:order-2 grid auto-rows-min break-inside-avoid">
-            <SectionTitle>{education.title}</SectionTitle>
-            <ul className="ml-4 marker:text-green-500 list-disc">
-              {education.items.map((item) => (
-                <li key={item.title} className="mb-2">
-                  <Paragraph size="large">{item.title}</Paragraph>
-                  <Paragraph size="small" weight="light" variant="subdued">
-                    {item.type} @ {item.organization} | <span className="text-nowrap">{item.date}</span>
-                  </Paragraph>
-                </li>
-              ))}
-            </ul>
-          </section> */}
-            {/** Interests */}
-            {/* <section className="gap-y-2 order-5 print:order-4 grid auto-rows-min break-inside-avoid">
-            <SectionTitle>{interests.title}</SectionTitle>
-            <ul>
-              {interests.items.map((item) => (
-                <li key={item} className="my-2">
-                  <Paragraph weight="extralight">{item}</Paragraph>
-                </li>
-              ))}
-            </ul>
-          </section> */}
+            <section className="gap-y-2 order-4 print:order-2 grid md:row-span-2 auto-rows-min break-inside-avoid">
+              <SectionTitle>{copy.education.title}</SectionTitle>
+              <ul className="ml-4 marker:text-gray-600 list-disc">
+                {copy.education.items.map((item) => (
+                  <li key={item.title} className="mb-2">
+                    <Paragraph size="large">{item.title}</Paragraph>
+                    <Paragraph size="small" weight="light" variant="subdued">
+                      {item.type} @ {item.organization} | <span className="text-nowrap">{item.date}</span>
+                    </Paragraph>
+                  </li>
+                ))}
+              </ul>
+            </section>
             {/** Projects */}
-            {/* <section className="gap-y-4 order-6 grid sm:col-span-2 auto-rows-min print:mt-16 break-inside-avoid">
-            <SectionTitle className="sm:text-center">{projects.title}</SectionTitle>
-            <div className="gap-8 grid md:grid-cols-2">
-              {projects.items.map((item) => (
-                <Link
-                  key={item.title}
-                  href={item.link}
-                  className="flex flex-col gap-2 hover:shadow-md mb-2 px-6 py-4 border rounded-xl transition"
-                  target="_blank"
-                >
-                  <Paragraph size="large">{item.title}</Paragraph>
-                  <Paragraph weight="light">{item.description}</Paragraph>
-                  <Paragraph size="small" weight="light" variant="subdued">
-                    {projects.pre_technologies} {item.technologies.join(', ')}
-                  </Paragraph>
-                </Link>
-              ))}
-            </div>
-          </section> */}
+            <section className="gap-y-4 order-6 grid auto-rows-min print:mt-16 break-inside-avoid">
+              <SectionTitle>{copy.projects.title}</SectionTitle>
+              <div className="gap-4 grid">
+                {copy.projects.items.map((item) => (
+                  <NavLink
+                    key={item.title}
+                    to={item.link}
+                    className="flex flex-col gap-2 hover:shadow-md px-6 py-4 border rounded-xl transition"
+                    target="_blank"
+                  >
+                    <Paragraph size="large" weight="bold">
+                      {item.title}
+                    </Paragraph>
+                    <Paragraph weight="light">{item.description}</Paragraph>
+                    <Paragraph size="small" weight="light" variant="subdued" className="mt-2">
+                      {copy.projects.pre_technologies}
+                    </Paragraph>
+                    <div className="flex items-center gap-2">{item.technologies.map((tech) => getToolIcon(tech))}</div>
+                  </NavLink>
+                ))}
+              </div>
+            </section>
             {/** Full experience */}
             {/* <section className="gap-y-4 order-7 grid sm:col-span-2 auto-rows-min print:mt-4 break-inside-avoid">
             <SectionTitle className="sm:text-center">{experience.title.full}</SectionTitle>
