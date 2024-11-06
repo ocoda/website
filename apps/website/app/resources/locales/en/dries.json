@@ -109,19 +109,19 @@
         "tools": [
           {
             "name": "React.js",
-            "logo": "react"
+            "logo": "reactjs"
           },
           {
             "name": "Next.js",
-            "logo": "next"
+            "logo": "nextjs"
           },
           {
             "name": "Remix.run",
-            "logo": "next"
+            "logo": "remix"
           },
           {
             "name": "Tailwind CSS",
-            "logo": "tailwindcss"
+            "logo": "tailwind"
           }
         ]
       },
@@ -138,7 +138,7 @@
           },
           {
             "name": "Github Actions",
-            "logo": "github"
+            "logo": "github-actions"
           },
           {
             "name": "CircleCI",
@@ -155,7 +155,7 @@
           },
           {
             "name": "PostgreSQL",
-            "logo": "postgresql"
+            "logo": "postgres"
           }
         ]
       },
@@ -189,8 +189,8 @@
         "category": "Misc",
         "tools": [
           {
-            "name": "UNIX",
-            "logo": "unix"
+            "name": "Linux",
+            "logo": "linux"
           },
           {
             "name": "Git",
@@ -246,14 +246,14 @@
       {
         "title": "@ocoda/event-sourcing",
         "description": "An open-source library to help people get started with event-sourcing and CQRS in NestJS, with support for MongoDB and DynamoDB as an event-store.",
-        "technologies": ["Node.js", "NestJS", "MongoDB", "DynamoDB", "CircleCI"],
+        "technologies": ["nodejs", "nestjs", "mongodb", "postgres", "dynamodb", "github-actions"],
         "link": "https://github.com/ocoda/event-sourcing"
       },
       {
-        "title": "This resume",
-        "description": "A statically generated website using NextJS and Tailwind CSS, hosted on AWS.",
-        "technologies": ["React", "Tailwind CSS", "AWS"],
-        "link": "https://github.com/drieshooghe/about"
+        "title": "This website",
+        "description": "A website using Remix.run and Tailwind CSS, hosted on AWS.",
+        "technologies": ["reactjs", "remix", "tailwind", "aws"],
+        "link": "https://github.com/ocoda/website"
       }
     ]
   },
