@@ -5,6 +5,15 @@ import plugin from 'tailwindcss/plugin';
 export default {
   content: ['./app/**/*.{js,jsx,ts,tsx}'],
   theme: {
+    container: {
+      padding: {
+        DEFAULT: '1rem',
+        sm: '2rem',
+        lg: '4rem',
+        xl: '5rem',
+        '2xl': '6rem',
+      },
+    },
     extend: {
       fontFamily: {
         sans: ['Source Sans Pro', ...fontFamily.sans],

@@ -23,6 +23,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
       },
       introduction: t('introduction'),
       expertise: t('expertise', { returnObjects: true }) as (typeof en)['dries']['expertise'],
+      experience: t('experience', { returnObjects: true }) as (typeof en)['dries']['experience'],
     },
     images: {
       waves: generateImgSrc({ src: 'waves.svg' }),
@@ -53,16 +54,24 @@ export default function Dries() {
   const { copy, images } = useLoaderData<typeof loader>();
   return (
     <>
-      <img src={images.waves} alt="Waves" className="mt-28 w-full" style={{ transform: 'scale(-1, 1)' }} />
+      <img
+        src={images.waves}
+        alt="Waves"
+        className="mt-28 w-full"
+        style={{ transform: 'scale(-1, 1)' }}
+        width={300}
+        height={29}
+      />
 
-      <header className="relative flex flex-col">
-        <div className="flex flex-col items-center bg-white -mt-px py-4">
+      <header className="bg-white px-16 md:px-8">
+        <div className="justify-center grid mx-auto -mt-px py-4 container">
           <Avatar images={images.avatar} className="border-shadow mb-2 w-40 lg:w-56 print:w-32" />
-          <div className="flex flex-col items-center mx-auto max-w-5xl text-gray-800 container">
-            <p className="pb-1 text-xl print:text-lg">{copy.title.pre}</p>
-            <h1 className="mb-3 font-medium text-4xl print:text-3xl">{copy.title.main}</h1>
-            <p className="flex items-center gap-0.5">
-              <LocationIcon className="w-4 h-4" /> <span className="font-light text-sm">{copy.info.location}</span>
+          <div className="items-center gap-2 grid text-center text-gray-800">
+            <p className="text-xl print:text-lg">{copy.title.pre}</p>
+            <h1 className="drop-shadow font-medium text-4xl print:text-3xl">{copy.title.main}</h1>
+            <p className="flex justify-center mt-2">
+              <LocationIcon className="mr-0.5 w-4 h-4" />{' '}
+              <span className="font-light text-sm">{copy.info.location}</span>
             </p>
           </div>
         </div>
@@ -82,16 +91,16 @@ export default function Dries() {
               <ul>
                 {copy.expertise.items.map((item) => (
                   <li key={item} className="my-2">
-                    <Paragraph weight="extralight">{item}</Paragraph>
+                    <Paragraph weight="light">{item}</Paragraph>
                   </li>
                 ))}
               </ul>
             </section>
             {/** Highlighted experience */}
-            {/* <section className="gap-y-2 order-2 sm:order-1 print:hidden grid auto-rows-min break-inside-avoid">
-            <SectionTitle>{experience.title.short}</SectionTitle>
-            <Timeline experience={experience} />
-          </section> */}
+            <section className="gap-y-2 order-2 sm:order-1 print:hidden grid auto-rows-min break-inside-avoid">
+              <SectionTitle>{copy.experience.title.short}</SectionTitle>
+              {/* <Timeline experience={copy.experience} /> */}
+            </section>
             {/** Skills */}
             {/* <section className="gap-y-2 order-3 md:order-2 print:order-1 grid auto-rows-min break-inside-avoid">
             <SectionTitle>{skills.title}</SectionTitle>
@@ -186,7 +195,14 @@ export default function Dries() {
       </div>
 
       <section className="w-full h-60">
-        <img src={images.waves} alt="Waves" className="-mt-px w-full" style={{ transform: 'scale(1, -1)' }} />
+        <img
+          src={images.waves}
+          alt="Waves"
+          className="-mt-px w-full"
+          style={{ transform: 'scale(1, -1)' }}
+          width={300}
+          height={29}
+        />
       </section>
     </>
   );

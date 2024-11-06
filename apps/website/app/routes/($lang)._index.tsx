@@ -2,6 +2,7 @@ import { type LoaderFunctionArgs, type MetaFunction, json } from '@remix-run/nod
 import { i18n } from '~/modules/i18n/i18n.server';
 
 import { useLoaderData } from '@remix-run/react';
+import SectionTitle from '~/components/section/SectionTitle';
 import { type PageMetadata, getDefaultMetaTags, getLocaleMetaTags, getPageMetaTags } from '~/modules/meta';
 import type { en } from '~/resources/locales/en';
 import { generateImgSrc } from '~/utils/generate-img-src.server';
@@ -47,9 +48,9 @@ interface ServiceCardProps {
 function ServiceCard({ image, imageAlt, title, description }: ServiceCardProps) {
   return (
     <div className="even:md:text-right items-center grid md:grid-cols-2 odd:md:text-left group">
-      <img src={image} alt={imageAlt} className="group-odd:md:order-last mx-auto p-6 w-64" />
+      <img src={image} alt={imageAlt} className="group-odd:md:order-last mx-auto p-6 w-64" width={256} />
       <div className="p-6">
-        <h3 className="mb-3 font-bold text-2xl text-gray-800 lg:text-3xl leading-none">{title}</h3>
+        <SectionTitle>{title}</SectionTitle>
         <p className="text-gray-600">{description}</p>
       </div>
     </div>
@@ -61,36 +62,48 @@ export default function Index() {
 
   return (
     <>
-      <header className="px-16 md:px-8 pt-24">
-        <div className="items-center gap-8 grid md:grid-cols-2 mx-auto md:my-4 md:p-8 container">
+      <header className="mx-auto pt-24 container">
+        <div className="items-center gap-8 grid md:grid-cols-2 mx-auto md:my-4 md:p-8">
           <div className="gap-4 grid text-black-900 text-center md:text-left">
             <h1 className="font-bold text-3xl lg:text-5xl leading-tight whitespace-pre-line">{copy.title}</h1>
             <p className="text-lg lg:text-2xl leading-normal">{copy.description}</p>
           </div>
-          <div className="relative mx-auto w-4/5 lg:w-3/5 text-center">
-            <img src={images.cloudComputing} alt="People monitoring statistics" className="relative z-20 w-full" />
+          <div className="relative mx-auto w-4/5 xl:w-3/5 text-center">
+            <img
+              src={images.cloudComputing}
+              alt="People monitoring statistics"
+              className="relative z-20 w-full"
+              width={221}
+              height={150}
+            />
             <img
               src={images.cloudComputingExtra1}
               alt="A cloud"
               className="top-0 left-0 -z-10 absolute w-full animate-float-vertical"
+              width={221}
+              height={150}
             />
             <img
               src={images.cloudComputingExtra2}
               alt="A monitor"
               className="top-0 right-0 bottom-0 left-0 -z-10 absolute w-full animate-float-depth"
+              width={221}
+              height={150}
             />
             <img
               src={images.cloudComputingExtra3}
               alt="A monitor"
               className="right-0 bottom-0 -z-10 absolute w-full animate-float-depth"
               style={{ animationDelay: '0.8s' }}
+              width={221}
+              height={150}
             />
           </div>
         </div>
       </header>
 
       <div className="relative z-20 -mt-4 lg:-mt-18 -mb-[1px]">
-        <img src={images.waves} alt="Waves" className="w-full" />
+        <img src={images.waves} alt="Waves" className="w-full" width={300} height={29} />
       </div>
 
       <section className="bg-white py-8">
@@ -131,7 +144,14 @@ export default function Index() {
       </section>
 
       <section className="w-full h-60">
-        <img src={images.waves} alt="Waves" className="-mt-px w-full" style={{ transform: 'scale(-1, -1)' }} />
+        <img
+          src={images.waves}
+          alt="Waves"
+          className="-mt-px w-full"
+          style={{ transform: 'scale(-1, -1)' }}
+          width={300}
+          height={29}
+        />
       </section>
     </>
   );
