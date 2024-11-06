@@ -1,11 +1,13 @@
 import { type LoaderFunctionArgs, type MetaFunction, json } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
 import { Avatar } from '~/components/avatar/Avatar';
-import { LocationIcon } from '~/components/icons';
 import Paragraph from '~/components/paragraph/Paragraph';
 import SectionTitle from '~/components/section/SectionTitle';
+import { Timeline } from '~/components/timeline/Timeline';
 import { i18n } from '~/modules/i18n/i18n.server';
 import { type PageMetadata, getDefaultMetaTags, getLocaleMetaTags, getPageMetaTags } from '~/modules/meta';
+import { LocationIcon } from '~/resources/icons';
+import { WavesIllustration } from '~/resources/illustrations';
 import type { en } from '~/resources/locales/en';
 import { generateImgSrc } from '~/utils/generate-img-src.server';
 
@@ -24,6 +26,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
       introduction: t('introduction'),
       expertise: t('expertise', { returnObjects: true }) as (typeof en)['dries']['expertise'],
       experience: t('experience', { returnObjects: true }) as (typeof en)['dries']['experience'],
+      skills: t('skills', { returnObjects: true }) as (typeof en)['dries']['skills'],
     },
     images: {
       waves: generateImgSrc({ src: 'waves.svg' }),
@@ -54,23 +57,16 @@ export default function Dries() {
   const { copy, images } = useLoaderData<typeof loader>();
   return (
     <>
-      <img
-        src={images.waves}
-        alt="Waves"
-        className="mt-28 w-full"
-        style={{ transform: 'scale(-1, 1)' }}
-        width={300}
-        height={29}
-      />
+      <WavesIllustration className="mt-32 w-full md:h-16 lg:h-32" />
 
       <header className="bg-white px-16 md:px-8">
-        <div className="justify-center grid mx-auto -mt-px py-4 container">
+        <div className="justify-items-center grid mx-auto -mt-px py-4 container">
           <Avatar images={images.avatar} className="border-shadow mb-2 w-40 lg:w-56 print:w-32" />
           <div className="items-center gap-2 grid text-center text-gray-800">
             <p className="text-xl print:text-lg">{copy.title.pre}</p>
-            <h1 className="drop-shadow font-medium text-4xl print:text-3xl">{copy.title.main}</h1>
+            <h1 className="font-medium text-4xl print:text-3xl">{copy.title.main}</h1>
             <p className="flex justify-center mt-2">
-              <LocationIcon className="mr-0.5 w-4 h-4" />{' '}
+              <LocationIcon className="mr-0.5 w-4 h-4 text-red-700" />{' '}
               <span className="font-light text-sm">{copy.info.location}</span>
             </p>
           </div>
@@ -97,41 +93,41 @@ export default function Dries() {
               </ul>
             </section>
             {/** Highlighted experience */}
-            <section className="gap-y-2 order-2 sm:order-1 print:hidden grid auto-rows-min break-inside-avoid">
+            <section className="gap-y-2 order-2 sm:order-1 print:hidden grid auto-rows-min mb-4 break-inside-avoid">
               <SectionTitle>{copy.experience.title.short}</SectionTitle>
-              {/* <Timeline experience={copy.experience} /> */}
+              <Timeline experience={copy.experience} />
             </section>
             {/** Skills */}
-            {/* <section className="gap-y-2 order-3 md:order-2 print:order-1 grid auto-rows-min break-inside-avoid">
-            <SectionTitle>{skills.title}</SectionTitle>
-            <Paragraph size="medium" weight="light">
-              {skills.description}
-            </Paragraph>
-            <div className="gap-2.5 grid md:grid-cols-2">
-              {skills.items.map(({ category, tools }) => {
-                return (
-                  <div key={category} className="flex flex-col gap-2">
-                    <Paragraph size="medium" weight="normal">
-                      {category}
-                    </Paragraph>
-                    <ul className="flex flex-wrap gap-1">
-                      {tools.map((tool) => (
-                        <li key={tool.name}>
-                          <Paragraph
-                            weight="extralight"
-                            size="small"
-                            className="px-2 py-0.5 border rounded-lg whitespace-nowrap"
-                          >
-                            {tool.name}
-                          </Paragraph>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                );
-              })}
-            </div>
-          </section> */}
+            <section className="gap-y-2 order-3 md:order-2 print:order-1 grid auto-rows-min break-inside-avoid">
+              <SectionTitle>{copy.skills.title}</SectionTitle>
+              <Paragraph size="medium" weight="light">
+                {copy.skills.description}
+              </Paragraph>
+              <div className="gap-2.5 grid md:grid-cols-2">
+                {copy.skills.items.map(({ category, tools }) => {
+                  return (
+                    <div key={category} className="flex flex-col gap-2">
+                      <Paragraph size="medium" weight="normal">
+                        {category}
+                      </Paragraph>
+                      <ul className="flex flex-wrap gap-1">
+                        {tools.map((tool) => (
+                          <li key={tool.name}>
+                            <Paragraph
+                              weight="extralight"
+                              size="small"
+                              className="px-2 py-0.5 border rounded-lg whitespace-nowrap"
+                            >
+                              {tool.name}
+                            </Paragraph>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
             {/** Education & Certifications */}
             {/* <section className="gap-y-2 order-4 print:order-2 grid auto-rows-min break-inside-avoid">
             <SectionTitle>{education.title}</SectionTitle>
@@ -193,17 +189,6 @@ export default function Dries() {
         </div> */}
         </div>
       </div>
-
-      <section className="w-full h-60">
-        <img
-          src={images.waves}
-          alt="Waves"
-          className="-mt-px w-full"
-          style={{ transform: 'scale(1, -1)' }}
-          width={300}
-          height={29}
-        />
-      </section>
     </>
   );
 }

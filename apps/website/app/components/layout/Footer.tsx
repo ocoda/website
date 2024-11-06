@@ -10,7 +10,7 @@ type Props = {
 
 export const Footer: FC<Props> = ({ copy, lng }) => {
   return (
-    <footer className="bg-white border-t text-gray-500 text-xs md:text-sm">
+    <footer className="bg-white text-gray-500 text-xs md:text-sm">
       <div className="items-center gap-1 md:gap-2 grid grid-cols-2 mx-auto px-8 py-8 container">
         <div className="flex flex-col gap-2">
           <span>Ocoda BV</span>

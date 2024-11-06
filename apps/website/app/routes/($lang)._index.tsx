@@ -7,6 +7,8 @@ import { type PageMetadata, getDefaultMetaTags, getLocaleMetaTags, getPageMetaTa
 import type { en } from '~/resources/locales/en';
 import { generateImgSrc } from '~/utils/generate-img-src.server';
 
+import { WavesIllustration } from '~/resources/illustrations';
+
 export const handle = { i18n: 'home' };
 
 export async function loader({ request }: LoaderFunctionArgs) {
@@ -102,11 +104,9 @@ export default function Index() {
         </div>
       </header>
 
-      <div className="relative z-20 -mt-4 lg:-mt-18 -mb-[1px]">
-        <img src={images.waves} alt="Waves" className="w-full" width={300} height={29} />
-      </div>
+      <WavesIllustration className="relative z-20 w-full md:h-16 lg:h-32" />
 
-      <section className="bg-white py-8">
+      <section className="bg-white -mt-px py-8">
         <div className="mx-auto max-w-5xl container">
           <h2 className="my-2 p-4 font-bold text-3xl text-center text-gray-800 lg:text-5xl leading-tight">
             {copy.services.title}
@@ -141,17 +141,6 @@ export default function Index() {
             />
           </div>
         </div>
-      </section>
-
-      <section className="w-full h-60">
-        <img
-          src={images.waves}
-          alt="Waves"
-          className="-mt-px w-full"
-          style={{ transform: 'scale(-1, -1)' }}
-          width={300}
-          height={29}
-        />
       </section>
     </>
   );

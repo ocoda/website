@@ -1,7 +1,7 @@
 import { Link } from '@remix-run/react';
 import { type FC, useEffect, useMemo, useRef, useState } from 'react';
-import { GithubIcon, LinkedInIcon, MailIcon, OcodaIcon } from '~/components/icons';
 import { type Language, ensureLocalizedURL } from '~/modules/i18n/resources';
+import { GithubIcon, LinkedInIcon, MailIcon, OcodaIcon } from '~/resources/icons';
 import type { en } from '~/resources/locales/en';
 import { useClickOutside } from '~/utils/use-click-outside';
 import { LanguageSelector } from './LanguageSelector';

@@ -1,9 +1,9 @@
 import { Link, useLocation } from '@remix-run/react';
-import { useRef, useState, type FC } from 'react';
+import { type FC, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useChangeLanguage } from 'remix-i18next/react';
-import { ChevronDownIcon } from '~/components/icons';
 import { ensureLocalizedURL, supportedLanguages } from '~/modules/i18n/resources';
+import { ChevronDownIcon } from '~/resources/icons';
 import { useClickOutside } from '~/utils/use-click-outside';
 
 export const LanguageSelector: FC = () => {

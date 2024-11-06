@@ -66,7 +66,6 @@ export default function App() {
         <Links />
       </head>
       <body className="bg-gradient-to-r from-10% from-white lg:from-0% via-gray-300 to-gray-500 lg:to-gray-600 text-white leading-normal tracking-normal">
-        {/* <NavBar /> */}
         <Layout lng={locale} copy={copy}>
           <Outlet />
         </Layout>
