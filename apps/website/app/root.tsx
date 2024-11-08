@@ -13,13 +13,12 @@ import {
 
 import { useTranslation } from 'react-i18next';
 import { useChangeLanguage } from 'remix-i18next/react';
+import { NotFoundMessage } from '~/components/404/NotFoundMessage';
+import Layout from '~/components/layout/Layout';
 import { i18n } from '~/modules/i18n/i18n.server';
 import { ensureLocalizedURL, getLngFromParams } from '~/modules/i18n/resources';
-import { NotFoundMessage } from './components/404/NotFoundMessage';
-import Layout from './components/layout/Layout';
-import type { en } from './resources/locales/en';
-// @ts-ignore
-import styles from './styles/app.css?url';
+import type { en } from '~/resources/locales/en';
+import styles from '~/styles/app.css?url';
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const locale = getLngFromParams(params) ?? (await i18n.getLocale(request));
