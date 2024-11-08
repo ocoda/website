@@ -4,8 +4,7 @@
   "description": "Ocoda.be Website",
   "type": "module",
   "scripts": {
-    "prebuild": "rm -rf ./build && remix vite:build",
-    "build": "node build.mjs",
+    "build": "rm -rf ./build && remix vite:build",
     "dev": "remix vite:dev --host",
     "start": "pnpm prebuild && CDN_URL='https://ocodacdn.dev' remix-serve ./build/server/index.js",
     "format": "biome format --write",
@@ -27,6 +26,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^15.1.0",
+    "remix-aws": "^1.2.2",
     "remix-i18next": "^6.4.1",
     "remix-image": "^1.4.0"
   },
