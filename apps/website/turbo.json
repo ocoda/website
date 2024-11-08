@@ -6,6 +6,9 @@
       "persistent": true
     },
     "lint": {},
-    "format": {}
+    "format": {},
+    "build": {
+      "outputs": ["build/**", "public/build/**"]
+    }
   }
 }
