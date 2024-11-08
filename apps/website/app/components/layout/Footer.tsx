@@ -18,7 +18,7 @@ export const Footer: FC<Props> = ({ copy, lng }) => {
             <Link to="mailto:hello@ocoda.be">hello@ocoda.be</Link>
           </span>
           <span>
-            VAT: <span className="text-nowrap">BE 0123.456.7890</span>
+            VAT: <span className="text-nowrap">BE 1016.039.564</span>
           </span>
         </div>
         <div className="flex flex-col items-end gap-2 text-end">
