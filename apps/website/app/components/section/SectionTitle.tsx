@@ -8,6 +8,7 @@ const SectionTitle: FC<Props> = ({ children, className }) => {
   const classNames = className?.split(' ') ?? [];
   const classNameValue = [
     'mb-3',
+    'lg:mb-4',
     'font-bold',
     'text-xl',
     'lg:text-2xl',

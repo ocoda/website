@@ -8,8 +8,6 @@
     }
 
     .item {
-      grid-template-columns: 1fr auto 1fr;
-
       &:hover > .icon {
         background-color: #55604e;
         color: white;
@@ -42,8 +40,6 @@
       }
 
       &:nth-child(odd) {
-        grid-template-areas: "content icon .";
-
         .description {
           align-items: end;
           text-align: right;
@@ -61,8 +57,6 @@
       }
 
       &:nth-child(even) {
-        grid-template-areas: ". icon content";
-
         .description {
           align-items: start;
           text-align: left;
@@ -82,20 +76,6 @@
   }
 }
 
-.item {
-  display: grid;
-  position: relative;
-  grid-template-columns: auto 1fr;
-  grid-template-areas: "icon content";
-  gap: 1rem;
-}
-
 .icon {
   transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1), background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.description {
-  grid-area: content;
-  display: flex;
-  flex-direction: column;
 }

@@ -73,16 +73,16 @@ export default function Dries() {
         </div>
       </header>
 
-      <div className="bg-white py-4 md:py-8">
-        <div className="mx-auto md:mx-auto max-w-xs sm:max-w-md md:max-w-2xl xl:max-w-5xl print:max-w-2xl container">
-          <div className="border-y mx-auto mb-8 py-4 max-w-5xl container">
+      <div className="bg-white pt-4 md:pt-8 pb-24 md:pb-32">
+        <div className="mx-auto max-w-5xl container">
+          <div className="border-y mx-auto mb-8 py-4 lg:py-0 max-w-5xl container">
             <Paragraph weight="normal" size="large" className="text-center">
               {copy.introduction}
             </Paragraph>
           </div>
-          <div className="gap-8 print:gap-6 grid grid-cols-1 md:grid-cols-2">
+          <div className="gap-8 print:gap-6 grid grid-cols-1 md:grid-cols-2 p-4 lg:p-0">
             {/** Expertise */}
-            <section className="gap-y-2 order-1 md:order-2 print:order-3 grid auto-rows-min break-inside-avoid">
+            <section className="order-1 md:order-2 print:order-3 grid auto-rows-min break-inside-avoid">
               <SectionTitle>{copy.expertise.title}</SectionTitle>
               <ul>
                 {copy.expertise.items.map((item) => (
@@ -93,7 +93,7 @@ export default function Dries() {
               </ul>
             </section>
             {/** Interests */}
-            <section className="gap-y-2 order-5 md:order-3 print:order-4 grid auto-rows-min break-inside-avoid">
+            <section className="order-5 md:order-3 print:order-4 grid auto-rows-min break-inside-avoid">
               <SectionTitle>{copy.interests.title}</SectionTitle>
               <ul>
                 {copy.interests.items.map((item) => (
@@ -104,12 +104,12 @@ export default function Dries() {
               </ul>
             </section>
             {/** Highlighted experience */}
-            <section className="gap-y-2 order-2 md:order-1 print:hidden grid md:row-span-2 auto-rows-min mb-4 break-inside-avoid">
+            <section className="order-2 md:order-1 print:hidden grid md:row-span-2 auto-rows-min mb-4 break-inside-avoid">
               <SectionTitle>{copy.experience.title.short}</SectionTitle>
               <Timeline experience={copy.experience} />
             </section>
             {/** Skills */}
-            <section className="gap-y-2 order-3 md:order-3 print:order-1 grid md:col-span-2 auto-rows-min break-inside-avoid">
+            <section className="order-3 md:order-3 print:order-1 grid md:col-span-2 auto-rows-min break-inside-avoid">
               <SectionTitle>{copy.skills.title}</SectionTitle>
               <Paragraph size="medium" weight="light" className="mb-2">
                 {copy.skills.description}
@@ -117,7 +117,7 @@ export default function Dries() {
               <Skills skills={copy.skills.items} />
             </section>
             {/** Education & Certifications */}
-            <section className="gap-y-2 order-4 print:order-2 grid md:row-span-2 auto-rows-min break-inside-avoid">
+            <section className="order-4 print:order-2 grid md:row-span-2 auto-rows-min break-inside-avoid">
               <SectionTitle>{copy.education.title}</SectionTitle>
               <ul className="ml-4 marker:text-gray-600 list-disc">
                 {copy.education.items.map((item) => (
@@ -131,7 +131,7 @@ export default function Dries() {
               </ul>
             </section>
             {/** Projects */}
-            <section className="gap-y-4 order-6 grid auto-rows-min print:mt-16 break-inside-avoid">
+            <section className="order-6 grid auto-rows-min print:mt-16 break-inside-avoid">
               <SectionTitle>{copy.projects.title}</SectionTitle>
               <div className="gap-4 grid">
                 {copy.projects.items.map((item) => (
@@ -148,16 +148,20 @@ export default function Dries() {
                     <Paragraph size="small" weight="light" variant="subdued" className="mt-2">
                       {copy.projects.pre_technologies}
                     </Paragraph>
-                    <div className="flex items-center gap-2">{item.technologies.map((tech) => getToolIcon(tech))}</div>
+                    <div className="flex items-center gap-2">
+                      {item.technologies.map((tech) => (
+                        <span key={tech}>{getToolIcon(tech)}</span>
+                      ))}
+                    </div>
                   </NavLink>
                 ))}
               </div>
             </section>
             {/** Full experience */}
-            {/* <section className="gap-y-4 order-7 grid sm:col-span-2 auto-rows-min print:mt-4 break-inside-avoid">
-            <SectionTitle className="sm:text-center">{experience.title.full}</SectionTitle>
-            <Timeline variation="full" experience={experience} />
-          </section> */}
+            <section className="order-7 grid md:col-span-2 auto-rows-min print:mt-4 break-inside-avoid">
+              <SectionTitle className="sm:text-center">{copy.experience.title.full}</SectionTitle>
+              <Timeline experience={copy.experience} full />
+            </section>
           </div>
           {/* <div className="flex justify-center print:hidden mt-12 break-inside-avoid">
           <section className="flex flex-col items-center gap-3 bg-green-400 -mb-8 px-6 py-4 rounded-xl w-full md:max-w-md outline outline-8 outline-white">
