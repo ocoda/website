@@ -64,7 +64,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-gradient-to-r from-10% from-white lg:from-0% via-gray-300 to-gray-500 lg:to-gray-600 text-white leading-normal tracking-normal">
+      <body className="bg-gradient-to-r from-10% from-white lg:from-0% via-gray-300 print:via-white to-gray-500 lg:to-gray-600 print:to-white text-white leading-normal tracking-normal">
         <Layout lng={locale} copy={copy}>
           <Outlet />
         </Layout>

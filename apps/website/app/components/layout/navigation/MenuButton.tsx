@@ -10,7 +10,7 @@ export const MenuButton: FC<Props> = ({ isScrolling, isOpen, onToggle }) => {
   return (
     <label
       aria-expanded={isOpen}
-      className={`flex flex-col lg:hidden p-2 w-12 cursor-pointer ${isScrolling || isOpen ? 'text-black-950' : 'text-white'}`}
+      className={`print:hidden flex flex-col lg:hidden p-2 w-12 cursor-pointer ${isScrolling || isOpen ? 'text-black-950' : 'text-white'}`}
     >
       <input type="checkbox" checked={isOpen} onChange={onToggle} className="hidden peer" />
       <span className="bg-current my-[3px] rounded-full w-1/2 h-0.5 peer-checked:origin-bottom transition-all peer-checked:translate-x-[2px] peer-checked:translate-y-[2px] duration-300 ease-in-out peer-checked:rotate-45" />

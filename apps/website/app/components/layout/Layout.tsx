@@ -14,8 +14,8 @@ export default function Layout({
     <div>
       <NavBar lng={lng} copy={copy.nav} />
       <main>{children}</main>
-      <WavesIllustration className="-mt-px mb-16 lg:mb-8 w-full md:h-16 lg:h-32 mirror-y" />
-      <WavesIllustration className="-mb-px w-full md:h-16 lg:h-32 mirror-x" />
+      <WavesIllustration className="print:hidden -mt-px mb-16 lg:mb-8 w-full md:h-16 lg:h-32 mirror-y" />
+      <WavesIllustration className="print:hidden -mb-px w-full md:h-16 lg:h-32 mirror-x" />
       <Footer lng={lng} copy={copy.footer} />
     </div>
   );

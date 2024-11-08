@@ -3,5 +3,26 @@
     "title": "Ocoda - Privacy Policy"
   },
   "title": "Ocoda - Privacy Policy",
-  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget nunc"
+  "sections": {
+    "introduction": {
+      "title": "Introduction",
+      "description": "This privacy policy applies to Ocoda BV (\"we\", \"our\", \"us\") and outlines our practices regarding personal data. We do not collect, store, or process any personal data of users on this website."
+    },
+    "collection": {
+      "title": "Information Collection and Use",
+      "description": "Our website does not gather personal information. The site is solely intended to provide information about our IT consultancy services and includes links to third-party websites, which may have their own privacy policies. We encourage users to review those policies if they visit third-party sites."
+    },
+    "links": {
+      "title": "Third-Party Links",
+      "description": "Our website may contain links to third-party websites. We are not responsible for the privacy practices of those sites and recommend reviewing their respective privacy policies."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "For any questions or concerns about this privacy policy, please contact us at:"
+    },
+    "changes": {
+      "title": "Changes to this Privacy Policy",
+      "description": "We may update this privacy policy from time to time. Please review this page periodically for any changes. This policy is effective as of {{val, datetime}}."
+    }
+  }
 }

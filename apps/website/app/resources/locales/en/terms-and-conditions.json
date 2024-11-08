@@ -1,7 +1,36 @@
 {
   "meta": {
-    "title": "Ocoda - Terms & Conditions"
+    "title": "Ocoda - Terms and Conditions"
   },
-  "title": "Ocoda - Terms & Conditions",
-  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget nunc"
+  "title": "Ocoda - Terms and Conditions",
+  "sections": {
+    "introduction": {
+      "title": "Introduction",
+      "description": "Welcome to the website of Ocoda BV, available at https://www.ocoda.be. These Terms and Conditions govern your access to and use of our website. By using this site, you agree to comply with these terms."
+    },
+    "website_use": {
+      "title": "Website Use",
+      "description": "This website is provided by Ocoda BV as an informational resource about our IT consultancy services. It is intended for general informational purposes only, and we do not guarantee that the information is accurate, complete, or current. The website may contain links to third-party sites, which are not controlled or endorsed by Ocoda BV. We encourage users to review the terms and privacy policies of these external sites."
+    },
+    "intellectual_property": {
+      "title": "Intellectual Property",
+      "description": "All content, materials, and design on this website, including but not limited to text and logos, are the property of Ocoda BV and protected by intellectual property laws. Unauthorized use, reproduction, or distribution of this content is prohibited."
+    },
+    "disclaimer_of_liability": {
+      "title": "Disclaimer of Liability",
+      "description": "Ocoda BV provides the website and its content \"as is\" without any warranties of any kind. We disclaim liability for any direct, indirect, or consequential damages that may arise from the use of this website or any third-party websites linked from it."
+    },
+    "governing_law": {
+      "title": "Governing Law",
+      "description": "These terms and conditions are governed by and construed in accordance with the laws of Belgium. Any disputes arising from the use of this website will be subject to the exclusive jurisdiction of the courts of Belgium."
+    },
+    "changes": {
+      "title": "Changes to These Terms",
+      "description": "Ocoda BV reserves the right to update or modify these terms and conditions at any time. Please review this page periodically for any changes. By continuing to use the website, you agree to the modified terms. This policy is effective as of {{val, datetime}}."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "description": "If you have any questions about these Terms and Conditions, please contact us at:"
+    }
+  }
 }

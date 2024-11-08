@@ -69,7 +69,7 @@ export const NavBar: FC<Props> = ({ lng, copy }) => {
         <div
           data-menu-open={menuOpen}
           data-is-scrolling={offset > 10}
-          className="z-20 lg:flex data-[menu-open=true]:col-span-2 w-full max-h-0 data-[menu-open=true]:max-h-dvh lg:max-h-none text-white data-[is-scrolling=true]:text-black-950 data-[menu-open=true]:text-black-950"
+          className="z-20 lg:flex print:hidden data-[menu-open=true]:col-span-2 w-full max-h-0 data-[menu-open=true]:max-h-dvh lg:max-h-none text-white data-[is-scrolling=true]:text-black-950 data-[menu-open=true]:text-black-950"
         >
           <ul
             data-menu-open={menuOpen}

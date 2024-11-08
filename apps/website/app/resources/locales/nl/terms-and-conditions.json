@@ -1,7 +1,36 @@
 {
   "meta": {
-    "title": "Ocoda - Terms & Conditions"
+    "title": "Ocoda - Algemene Voorwaarden"
   },
-  "title": "Ocoda - Terms & Conditions",
-  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget nunc"
+  "title": "Ocoda - Algemene Voorwaarden",
+  "sections": {
+    "introduction": {
+      "title": "Inleiding",
+      "description": "Welkom op de website van Ocoda BV, beschikbaar via https://www.ocoda.be. Deze Algemene Voorwaarden zijn van toepassing op uw toegang tot en gebruik van onze website. Door gebruik te maken van de site, stemt u in met deze voorwaarden."
+    },
+    "website_use": {
+      "title": "Gebruik van de Website",
+      "description": "Deze website wordt door Ocoda BV aangeboden als een informatieve bron over onze IT-consultancyservices. De site is uitsluitend bedoeld voor algemene informatieve doeleinden, en we garanderen niet dat de informatie juist, volledig of actueel is. De website kan links bevatten naar websites van derden die niet worden beheerd of onderschreven door Ocoda BV. We raden gebruikers aan om de voorwaarden en het privacybeleid van deze externe sites te raadplegen."
+    },
+    "intellectual_property": {
+      "title": "Intellectuele Eigendom",
+      "description": "Alle inhoud, materialen en ontwerpen op deze website, inclusief maar niet beperkt tot tekst en logo's, zijn eigendom van Ocoda BV en worden beschermd door intellectuele eigendomswetten. Ongeautoriseerd gebruik, reproductie of verspreiding van deze inhoud is verboden."
+    },
+    "disclaimer_of_liability": {
+      "title": "Aansprakelijkheidsbeperking",
+      "description": "Ocoda BV biedt de website en haar inhoud \"zoals deze is\" aan, zonder enige garantie van welke aard dan ook. Wij wijzen elke aansprakelijkheid af voor directe, indirecte of gevolgschade die voortvloeit uit het gebruik van deze website of de websites van derden waarnaar wordt gelinkt."
+    },
+    "governing_law": {
+      "title": "Toepasselijk Recht",
+      "description": "Deze algemene voorwaarden worden beheerst door en geïnterpreteerd in overeenstemming met de wetten van België. Eventuele geschillen die voortvloeien uit het gebruik van deze website vallen onder de exclusieve bevoegdheid van de Belgische rechtbanken."
+    },
+    "changes": {
+      "title": "Wijzigingen in deze Voorwaarden",
+      "description": "Ocoda BV behoudt zich het recht voor om deze voorwaarden op elk moment bij te werken of te wijzigen. Controleer deze pagina regelmatig op eventuele wijzigingen. Door de website te blijven gebruiken, stemt u in met de gewijzigde voorwaarden. Deze voorwaarden zijn geldig vanaf {{val, datetime}}."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Als u vragen heeft over deze Algemene Voorwaarden, kunt u contact met ons opnemen via:"
+    }
+  }
 }

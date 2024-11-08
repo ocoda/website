@@ -1,7 +1,28 @@
 {
   "meta": {
-    "title": "Ocoda - Privacy Policy"
+    "title": "Ocoda - Privacyverklaring"
   },
-  "title": "Ocoda - Privacy Policy",
-  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut purus eget nunc"
+  "title": "Ocoda - Privacyverklaring",
+  "sections": {
+    "introduction": {
+      "title": "Inleiding",
+      "description": "Deze privacyverklaring is van toepassing op [Uw Bedrijfsnaam] (\"wij\", \"ons\", \"onze\") en beschrijft ons beleid ten aanzien van persoonsgegevens. We verzamelen, bewaren of verwerken geen persoonsgegevens van gebruikers op deze website."
+    },
+    "collection": {
+      "title": "Gegevensverzameling en Gebruik",
+      "description": "Onze website verzamelt geen persoonlijke gegevens. De site is uitsluitend bedoeld om informatie te verstrekken over onze IT-consultancyservices en bevat links naar websites van derden, die mogelijk hun eigen privacybeleid hebben. Wij raden gebruikers aan om deze te bekijken als ze derde websites bezoeken."
+    },
+    "links": {
+      "title": "Links van Derden",
+      "description": "Onze website kan links bevatten naar websites van derden. Wij zijn niet verantwoordelijk voor het privacybeleid van die websites en raden aan hun privacyverklaringen te lezen."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Voor vragen of opmerkingen over deze privacyverklaring, neem contact met ons op via:"
+    },
+    "changes": {
+      "title": "Wijzigingen in deze Privacyverklaring",
+      "description": "We kunnen deze privacyverklaring van tijd tot tijd bijwerken. Controleer deze pagina regelmatig op wijzigingen. Deze verklaring is geldig vanaf {{val, datetime}}."
+    }
+  }
 }
