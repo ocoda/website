@@ -43,9 +43,16 @@
     },
     "items": [
       {
+        "company": "Ocoda",
+        "role": "IT consulent",
+        "period": "Nov '24 - present",
+        "location": "Waregem, BE",
+        "description": "Met meer dan 7 jaar hands-on ervaring en een passie voor het succesvol realiseren van projecten, heb ik een IT-adviesbureau opgericht om samen te werken met klanten. Ik breng expertise in softwarearchitectuur, full-stack ontwikkeling en cloud engineering om teams te helpen ambitieuze projecten samen te plannen, strategisch vorm te geven en uit te voeren."
+      },
+      {
         "company": "Cheqroom",
         "role": "Senior software engineer",
-        "period": "Jan '23 - nu",
+        "period": "Jan '23 - Oct '24",
         "location": "Gent, BE",
         "description": "Naast het continu verbeteren van de Cheqroom-diensten heb ik de leiding genomen over het beheren van de cloud-omgeving, met focus op architectuur, security, kostenoptimalisatie en deployment-strategieën, om performance en schaalbaarheid te waarborgen."
       },
@@ -73,7 +80,7 @@
       {
         "company": "DAS Media",
         "role": "Web development stage",
-        "period": "Aug '17 - Okt '18",
+        "period": "Aug '17 - Sep '17",
         "location": "Waregem, BE",
         "description": "Tijdens mijn stage bij DAS Media bouwde ik websites met de LAMP-stack (Laravel) voor verschillende klanten in de B2C-sector."
       }

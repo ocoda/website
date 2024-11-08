@@ -75,7 +75,7 @@ export default function Dries() {
 
       <div className="bg-white pt-4 md:pt-8 pb-24 md:pb-32">
         <div className="mx-auto max-w-5xl container">
-          <div className="border-y mx-auto mb-8 py-4 lg:py-0 max-w-5xl container">
+          <div className="border-y mx-auto mb-8 py-4 max-w-5xl container">
             <Paragraph weight="normal" size="large" className="text-center">
               {copy.introduction}
             </Paragraph>

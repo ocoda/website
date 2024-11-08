@@ -43,9 +43,16 @@
     },
     "items": [
       {
+        "company": "Ocoda",
+        "role": "IT consultant",
+        "period": "Nov '24 - present",
+        "location": "Waregem, BE",
+        "description": "With over 7 years of hands-on experience and a passion for driving projects to success, I founded an IT consultancy firm to partner with clients. I bring expertise in software architecture, full-stack development, and cloud engineering to help teams plan, strategize, and execute ambitious projects together."
+      },
+      {
         "company": "Cheqroom",
         "role": "Senior software engineer",
-        "period": "Jan '23 - present",
+        "period": "Jan '23 - Oct '24",
         "location": "Ghent, BE",
         "description": "In addition to contributing to the continuous enhancement of Cheqroom's services, I took the lead in managing Cheqroom's cloud environment with a focus on architecture, security, cost optimization, and deployment strategies, ensuring high performance and scalability."
       },
@@ -66,14 +73,14 @@
       {
         "company": "DAS Media",
         "role": "Full-stack web developer",
-        "period": "Oct '17 - Jun '18",
+        "period": "Okt '17 - Jun '18",
         "location": "Waregem, BE",
         "description": "I was hired after my internship as a full-stack developer, contributing to both backend and frontend projects. During this time we transitioned from Laravel to CraftCMS to provide a better end-user experience for our clients."
       },
       {
         "company": "DAS Media",
         "role": "Web development internship",
-        "period": "Aug '17 - Oct '18",
+        "period": "Aug '17 - Sep '17",
         "location": "Waregem, BE",
         "description": "During my internship at DAS Media, I was tasked with building websites using the LAMP stack (Laravel) for various customers in the B2C sector."
       }

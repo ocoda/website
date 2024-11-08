@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import type { en } from '~/resources/locales/en';
-import { CheqroomIcon, DASMediaIcon, MeditechIcon } from '../../resources/icons';
+import { CheqroomIcon, DASMediaIcon, MeditechIcon, OcodaSimpleIcon } from '../../resources/icons';
 import Paragraph from '../paragraph/Paragraph';
 
 interface Props {
@@ -10,6 +10,8 @@ interface Props {
 
 const getIcon = (company: string) => {
   switch (company) {
+    case 'Ocoda':
+      return <OcodaSimpleIcon className="size-[15px]" />;
     case 'Cheqroom':
       return <CheqroomIcon className="size-[15px]" />;
     case 'DAS Media':
