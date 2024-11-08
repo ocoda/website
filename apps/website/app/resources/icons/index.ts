@@ -23,6 +23,7 @@ export { NestJSIcon } from './NestJS';
 export { NextJSIcon } from './NextJS';
 export { NodeJSIcon } from './NodeJS';
 export { OcodaIcon } from './Ocoda';
+export { OcodaSimpleIcon } from './OcodaSimple';
 export { PostgresIcon } from './Postgres';
 export { PrinterIcon } from './Printer';
 export { PythonIcon } from './Python';
