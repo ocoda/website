@@ -1,0 +1,8 @@
+{
+  "extends": ["//"],
+  "tasks": {
+    "deploy": {
+      "dependsOn": ["@ocoda/website#build"]
+    }
+  }
+}

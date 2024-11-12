@@ -3,6 +3,7 @@
   "tasks": {
     "dev": {},
     "lint": {},
-    "format": {}
+    "format": {},
+    "deploy": {}
   }
 }
