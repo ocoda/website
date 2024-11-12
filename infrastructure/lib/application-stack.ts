@@ -1,4 +1,5 @@
 import { join } from 'node:path';
+import { Duration } from 'aws-cdk-lib';
 import {
   AllowedMethods,
   CachePolicy,
@@ -26,7 +27,7 @@ import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { ARecord, AaaaRecord, RecordTarget } from 'aws-cdk-lib/aws-route53';
 import { CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
 import { BucketPolicy, type IBucket } from 'aws-cdk-lib/aws-s3';
-import { BucketDeployment, Source } from 'aws-cdk-lib/aws-s3-deployment';
+import { BucketDeployment, CacheControl, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import type { Construct } from 'constructs';
 import type { Domains } from './certificate-stack';
 import { type Domain, Stack, type StackProps } from './constructs';
@@ -151,7 +152,11 @@ export class ApplicationStack extends Stack {
       distribution,
       prune: true,
       sources: [Source.asset(join(this.sourcePath, 'client'))],
-      // cacheControl: [CacheControl.maxAge(Duration.days(365)), CacheControl.sMaxAge(Duration.days(365))],
+      cacheControl: [
+        CacheControl.setPublic(),
+        CacheControl.maxAge(Duration.seconds(31536000)),
+        CacheControl.immutable(),
+      ],
     });
   }
 }
