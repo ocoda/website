@@ -19,7 +19,8 @@ export class CertificateStack extends Stack {
     this.hostedZone = HostedZone.fromLookup(this, 'OcodaWebsiteHostedZone', { domainName });
 
     const websiteDomainCertificate = new Certificate(this, 'OcodaWebsiteCertificate', {
-      domainName: `*.${domainName}`,
+      domainName: domainName,
+      subjectAlternativeNames: [`www.${domainName}`],
       validation: CertificateValidation.fromDns(this.hostedZone),
     });
 

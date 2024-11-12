@@ -11,6 +11,10 @@ export class Domain {
     public readonly subdomain?: string,
   ) {}
 
+  get apex(): string {
+    return this.hostedZone.zoneName;
+  }
+
   get url(): string {
     return this.subdomain ? `${this.subdomain}.${this.hostedZone.zoneName}` : this.hostedZone.zoneName;
   }

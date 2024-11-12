@@ -2,7 +2,11 @@ import { join } from 'node:path';
 import {
   AllowedMethods,
   CachePolicy,
+  Function as CloudfrontFunction,
   Distribution,
+  FunctionCode,
+  FunctionEventType,
+  FunctionRuntime,
   HttpVersion,
   type IDistribution,
   OriginRequestPolicy,
@@ -72,9 +76,15 @@ export class ApplicationStack extends Stack {
 
     const bucketOrigin = S3BucketOrigin.withOriginAccessControl(bucket);
 
+    const redirectFunction = new CloudfrontFunction(this, 'RedirectApexFunction', {
+      comment: 'Redirect apex domain to www subdomain',
+      code: FunctionCode.fromFile({ filePath: join(__dirname, '../code/redirect-apex.js') }),
+      runtime: FunctionRuntime.JS_2_0,
+    });
+
     return new Distribution(this, 'OcodaWebsiteDistribution', {
       comment: 'Ocoda website distribution',
-      domainNames: [domain.url],
+      domainNames: [domain.apex, domain.url],
       certificate: domain.getCertificate('us-east-1'),
       defaultBehavior: {
         origin: new FunctionUrlOrigin(serverFnUrl),
@@ -83,6 +93,7 @@ export class ApplicationStack extends Stack {
         cachePolicy: CachePolicy.CACHING_DISABLED,
         compress: true,
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        functionAssociations: [{ eventType: FunctionEventType.VIEWER_REQUEST, function: redirectFunction }],
       },
       httpVersion: HttpVersion.HTTP2_AND_3,
       minimumProtocolVersion: SecurityPolicyProtocol.TLS_V1_2_2021,
@@ -120,16 +131,18 @@ export class ApplicationStack extends Stack {
   }
 
   private createRecords(domain: Domain, distribution: IDistribution) {
-    new ARecord(this, 'OcodaWebsiteARecord', {
+    const config = {
       zone: domain.hostedZone,
       target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
-      recordName: domain.url,
-    });
-    new AaaaRecord(this, 'OcodaWebsiteAAAARecord', {
-      recordName: domain.url,
-      zone: domain.hostedZone,
-      target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
-    });
+    };
+
+    // Apex
+    new ARecord(this, 'OcodaWebsiteApexARecord', { ...config, recordName: domain.apex });
+    new AaaaRecord(this, 'OcodaWebsiteApexAAAARecord', { ...config, recordName: domain.apex });
+
+    // www
+    new ARecord(this, 'OcodaWebsiteARecord', { ...config, recordName: domain.url });
+    new AaaaRecord(this, 'OcodaWebsiteAAAARecord', { ...config, recordName: domain.url });
   }
 
   private createRemixBucketDeployment(destinationBucket: IBucket, distribution: IDistribution) {
