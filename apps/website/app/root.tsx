@@ -40,7 +40,7 @@ export const links: LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
   {
     rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Source+Sans+Pro:400,700&family=Fredoka&display=swap',
+    href: 'https://fonts.googleapis.com/css2?family=Fredoka&family=Source+Sans+3:wght@400..700&display=swap',
   },
   { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
   { rel: 'icon', href: '/favicon.ico', type: 'image/x-icon' },

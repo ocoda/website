@@ -9,7 +9,6 @@ interface Props {
 export const MenuButton: FC<Props> = ({ isScrolling, isOpen, onToggle }) => {
   return (
     <label
-      aria-expanded={isOpen}
       className={`print:hidden flex flex-col lg:hidden p-2 w-12 cursor-pointer ${isScrolling || isOpen ? 'text-black-950' : 'text-white'}`}
     >
       <input type="checkbox" checked={isOpen} onChange={onToggle} className="hidden peer" />

@@ -6,12 +6,10 @@ interface Props {
   to: string;
 }
 
-export const NotFoundMessage: FC<Props> = ({ error, to }) => {
-  console.error(error);
+export const NotFoundMessage: FC<Props> = ({ to }) => {
   return (
     <div className="justify-center items-center grid mx-auto w-full h-dvh container">
       <div className="flex flex-col items-center gap-8">
-        {/* <Img src="404.webp" alt="Moss from the IT crowd looking at the fire in his office" className="rounded-md" /> */}
         <div className="font-display">You got lost - exclamation mark, exclamation mark</div>
         <NavLink
           to={to}

@@ -40,17 +40,27 @@ export const meta: MetaFunction<typeof loader> = ({ data, location }) => {
 };
 
 interface ServiceCardProps {
-  image: string;
-  imageAlt: string;
+  image: {
+    url: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
   title: string;
   description: string;
   reverse?: boolean;
 }
 
-function ServiceCard({ image, imageAlt, title, description }: ServiceCardProps) {
+function ServiceCard({ image, title, description }: ServiceCardProps) {
   return (
     <div className="even:md:text-right items-center grid md:grid-cols-2 odd:md:text-left group">
-      <img src={image} alt={imageAlt} className="group-odd:md:order-last mx-auto p-6 w-64" width={256} />
+      <img
+        src={image.url}
+        alt={image.alt}
+        className="group-odd:md:order-last mx-auto p-6 w-64"
+        width={image.width}
+        height={image.height}
+      />
       <div className="p-6">
         <SectionTitle>{title}</SectionTitle>
         <p className="text-gray-600">{description}</p>
@@ -77,6 +87,7 @@ export default function Index() {
               className="relative z-20 w-full"
               width={221}
               height={150}
+              loading="eager"
             />
             <img
               src={images.cloudComputingExtra1}
@@ -84,6 +95,7 @@ export default function Index() {
               className="top-0 left-0 -z-10 absolute w-full animate-float-vertical"
               width={221}
               height={150}
+              loading="eager"
             />
             <img
               src={images.cloudComputingExtra2}
@@ -91,6 +103,7 @@ export default function Index() {
               className="top-0 right-0 bottom-0 left-0 -z-10 absolute w-full animate-float-depth"
               width={221}
               height={150}
+              loading="eager"
             />
             <img
               src={images.cloudComputingExtra3}
@@ -99,6 +112,7 @@ export default function Index() {
               style={{ animationDelay: '0.8s' }}
               width={221}
               height={150}
+              loading="eager"
             />
           </div>
         </div>
@@ -114,27 +128,43 @@ export default function Index() {
           <div className="bg-ocoda-gradient opacity-25 mx-auto mb-4 rounded-t w-2/5 h-1 gradient" />
           <div className="flex flex-col gap-8 p-4 lg:p-0 text-center">
             <ServiceCard
-              image={images.cloudSolutions}
-              imageAlt={copy.services.items.cloud.image.alt}
+              image={{
+                url: images.cloudSolutions,
+                alt: copy.services.items.cloud.image.alt,
+                width: 210,
+                height: 150,
+              }}
               title={copy.services.items.cloud.title}
               description={copy.services.items.cloud.description}
             />
             <ServiceCard
-              image={images.backendEngineering}
-              imageAlt={copy.services.items.backend.image.alt}
+              image={{
+                url: images.backendEngineering,
+                alt: copy.services.items.backend.image.alt,
+                width: 151,
+                height: 150,
+              }}
               title={copy.services.items.backend.title}
               description={copy.services.items.backend.description}
               reverse
             />
             <ServiceCard
-              image={images.observability}
-              imageAlt={copy.services.items.observability.image.alt}
+              image={{
+                url: images.observability,
+                alt: copy.services.items.observability.image.alt,
+                width: 130,
+                height: 150,
+              }}
               title={copy.services.items.observability.title}
               description={copy.services.items.observability.description}
             />
             <ServiceCard
-              image={images.performanceImprovements}
-              imageAlt={copy.services.items.performance.image.alt}
+              image={{
+                url: images.performanceImprovements,
+                alt: copy.services.items.performance.image.alt,
+                width: 148,
+                height: 150,
+              }}
               title={copy.services.items.performance.title}
               description={copy.services.items.performance.description}
               reverse
