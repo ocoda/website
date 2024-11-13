@@ -123,6 +123,10 @@ export class ApplicationStack extends Stack {
           origin: bucketOrigin,
           viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         },
+        'site.webmanifest': {
+          origin: bucketOrigin,
+          viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        },
         '/assets/*': {
           origin: bucketOrigin,
           viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
