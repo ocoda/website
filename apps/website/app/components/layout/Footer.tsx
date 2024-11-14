@@ -22,8 +22,12 @@ export const Footer: FC<Props> = ({ copy, lng }) => {
           </span>
         </div>
         <div className="flex flex-col items-end gap-2 text-end">
-          <Link to={ensureLocalizedURL('/terms-and-conditions', lng)}>{copy.terms}</Link>
-          <Link to={ensureLocalizedURL('/privacy-policy', lng)}>{copy.privacy}</Link>
+          <Link to={ensureLocalizedURL('/terms-and-conditions', lng)} prefetch="viewport">
+            {copy.terms}
+          </Link>
+          <Link to={ensureLocalizedURL('/privacy-policy', lng)} prefetch="viewport">
+            {copy.privacy}
+          </Link>
           <span>
             Illustrations from{' '}
             <Link to={'https://www.reshot.com'} target="_blank">
