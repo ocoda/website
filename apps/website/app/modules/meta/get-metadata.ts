@@ -1,5 +1,13 @@
 import type { MetaDescriptor } from '@remix-run/node';
-import { ensureLocalizedURL, supportedLanguages } from '~/modules/i18n/resources';
+import { ensureLocalizedURL, supportedLanguages } from '../i18n/resources';
+
+declare global {
+  interface Window {
+    ENV: {
+      BASE_URL: string;
+    };
+  }
+}
 
 export function getDefaultMetaTags(options?: { index?: boolean }): MetaDescriptor[] {
   return [
@@ -24,9 +32,11 @@ export function getPageMetaTags(page?: PageMetadata): MetaDescriptor[] {
 }
 
 export function getLocaleMetaTags(url: string): MetaDescriptor[] {
-  return supportedLanguages.map((lng) => ({
-    rel: 'alternate',
-    hrefLang: lng,
-    href: ensureLocalizedURL(url, lng),
-  }));
+  const origin = typeof window === 'undefined' ? process.env.BASE_URL : window.ENV.BASE_URL;
+
+  const languageTags = supportedLanguages.map((lng) => ({ hrefLang: lng, href: ensureLocalizedURL(url, lng, origin) }));
+  return [
+    { rel: 'canonical', href: languageTags[0].href },
+    ...languageTags.map((params) => ({ rel: 'alternate', ...params })),
+  ];
 }

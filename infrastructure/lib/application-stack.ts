@@ -65,6 +65,7 @@ export class ApplicationStack extends Stack {
       logRetention: RetentionDays.THREE_DAYS,
       environment: {
         NODE_ENV: 'production',
+        BASE_URL: 'https://www.ocoda.be',
         CDN_URL: 'https://ocodacdn.com',
       },
     });

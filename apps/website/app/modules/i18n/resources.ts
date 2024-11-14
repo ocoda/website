@@ -28,8 +28,11 @@ export function getLngFromUrl(url: string): Language | undefined {
   }
 }
 
-export function ensureLocalizedURL(url: string, language?: Language): string {
-  let parts = url.replace(/^\/+|\/+$/g, '').split('/');
+export function ensureLocalizedURL(url: string, language?: Language, base?: string): string {
+  let parts = url
+    .replace(/^\/+|\/+$/g, '')
+    .split('/')
+    .filter((p) => p !== '');
 
   if (language && !supportedLanguages.includes(language)) {
     throw new Error(`Invalid language: ${language}. Supported languages are: ${supportedLanguages.join(', ')}`);
@@ -43,5 +46,5 @@ export function ensureLocalizedURL(url: string, language?: Language): string {
     parts = [language || defaultLanguage, ...parts];
   }
 
-  return `/${parts.join('/')}`;
+  return `${base || ''}/${parts.join('/')}`;
 }
