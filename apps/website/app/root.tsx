@@ -20,6 +20,7 @@ import { i18n } from '~/modules/i18n/i18n.server';
 import { ensureLocalizedURL, getLngFromParams } from '~/modules/i18n/resources';
 import type { en } from '~/resources/locales/en';
 import styles from '~/styles/app.css?url';
+import { generateImgSrc } from './utils/generate-img-src.server';
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const paramsLocale = getLngFromParams(params);
@@ -32,13 +33,21 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 
   const t = await i18n.getFixedT(request, 'common');
   const copy = {
+    meta: t('meta', { returnObjects: true }),
     nav: t('nav', { returnObjects: true }),
     footer: t('footer', { returnObjects: true }),
   } as typeof en.common;
 
   const { origin } = new URL(request.url);
 
-  return json({ locale: paramsLocale, copy, origin });
+  return json({
+    locale: paramsLocale,
+    copy,
+    origin,
+    images: {
+      og: generateImgSrc({ src: 'ocoda_og.jpg', options: { w: 1200, h: 627 } }),
+    },
+  });
 };
 
 export const handle = {
@@ -61,7 +70,7 @@ export const links: LinksFunction = () => [
 ];
 
 export default function App() {
-  const { locale, copy, origin } = useLoaderData<typeof loader>();
+  const { locale, copy, origin, images } = useLoaderData<typeof loader>();
   const { i18n } = useTranslation();
 
   useChangeLanguage(locale);
@@ -72,6 +81,21 @@ export default function App() {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
+        <meta property="og:title" content={copy.meta.og.title} />
+        <meta property="og:description" content={copy.meta.og.description} />
+        <meta property="og:site_name" content={copy.meta.og.site_name} />
+        <meta property="og:locale" content={locale} />
+        <meta property="og:image" content={images.og} />
+        <meta property="og:image:type" content={'image/jpeg'} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="627" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:title" content={copy.meta.og.title} />
+        <meta property="twitter:description" content={copy.meta.og.description} />
+        <meta property="twitter:image:type" content={'image/jpeg'} />
+        <meta property="twitter:image:width" content="1200" />
+        <meta property="twitter:image:height" content="627" />
         <Links />
       </head>
       <body className="bg-gradient-to-r from-10% from-white lg:from-0% via-gray-300 print:via-white to-gray-500 lg:to-gray-600 print:to-white text-white leading-normal tracking-normal">
