@@ -49,9 +49,10 @@ interface ServiceCardProps {
   title: string;
   description: string;
   reverse?: boolean;
+  lazy?: boolean;
 }
 
-function ServiceCard({ image, title, description }: ServiceCardProps) {
+function ServiceCard({ image, title, description, lazy }: ServiceCardProps) {
   return (
     <div className="even:md:text-right items-center grid md:grid-cols-2 odd:md:text-left group">
       <img
@@ -60,6 +61,7 @@ function ServiceCard({ image, title, description }: ServiceCardProps) {
         className="group-odd:md:order-last mx-auto p-6 w-64"
         width={image.width}
         height={image.height}
+        loading={lazy ? 'lazy' : 'eager'}
       />
       <div className="p-6">
         <SectionTitle>{title}</SectionTitle>
@@ -95,7 +97,7 @@ export default function Index() {
               className="top-0 left-0 -z-10 absolute w-full animate-float-vertical"
               width={221}
               height={150}
-              loading="eager"
+              loading="lazy"
             />
             <img
               src={images.cloudComputingExtra2}
@@ -103,7 +105,7 @@ export default function Index() {
               className="top-0 right-0 bottom-0 left-0 -z-10 absolute w-full animate-float-depth"
               width={221}
               height={150}
-              loading="eager"
+              loading="lazy"
             />
             <img
               src={images.cloudComputingExtra3}
@@ -112,7 +114,7 @@ export default function Index() {
               style={{ animationDelay: '0.8s' }}
               width={221}
               height={150}
-              loading="eager"
+              loading="lazy"
             />
           </div>
         </div>
@@ -168,6 +170,7 @@ export default function Index() {
               title={copy.services.items.performance.title}
               description={copy.services.items.performance.description}
               reverse
+              lazy
             />
           </div>
         </div>

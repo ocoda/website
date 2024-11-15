@@ -16,6 +16,7 @@ export const LinkButton: FC<Props> = ({ title, to, icon, onClick }) => {
       className="block p-4 w-full no-underline cursor-pointer group"
       target="_blank"
       title={title}
+      rel="noreferrer nofollow"
     >
       <span className="group-hover:*:scale-110 *:transition-transform *:duration-300 *:ease-in-out *:scale-100">
         {icon}

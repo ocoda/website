@@ -30,11 +30,11 @@ export const Footer: FC<Props> = ({ copy, lng }) => {
           </Link>
           <span>
             Illustrations from{' '}
-            <Link to={'https://www.reshot.com'} target="_blank">
+            <Link to={'https://www.reshot.com'} target="_blank" rel="noreferrer nofollow">
               Reshot
             </Link>{' '}
             &{' '}
-            <Link to={'https://www.getillustrations.com'} target="_blank">
+            <Link to={'https://www.getillustrations.com'} target="_blank" rel="noreferrer nofollow">
               GetIllustrations
             </Link>
           </span>

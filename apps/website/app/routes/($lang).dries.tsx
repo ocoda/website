@@ -140,6 +140,7 @@ export default function Dries() {
                     to={item.link}
                     className="flex flex-col gap-2 hover:shadow-md px-6 py-4 border rounded-xl transition"
                     target="_blank"
+                    rel="noreferrer nofollow"
                   >
                     <Paragraph size="large" weight="bold">
                       {item.title}
