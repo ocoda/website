@@ -1,9 +1,13 @@
 {
   "meta": {
-    "og": {
-      "title": "Ocoda - Your Trusted IT Solutions Partner",
-      "description": "Ocoda empowers businesses by delivering tailored IT consultancy services designed to optimize performance, drive innovation and enhance efficiency.",
-      "site_name": "Ocoda - Your Trusted IT Solutions Partner"
+    "url": "https://www.ocoda.be/en",
+    "name": "Ocoda BV",
+    "title": "Ocoda - Your Trusted IT Solutions Partner",
+    "description": "Ocoda empowers businesses by delivering tailored IT consultancy services designed to optimize performance, drive innovation and enhance efficiency.",
+    "address": {
+      "zip": "8791",
+      "city": "Waregem",
+      "country": "Belgium"
     }
   },
   "nav": {

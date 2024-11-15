@@ -40,12 +40,30 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 
   const { origin } = new URL(request.url);
 
+  const metaLogoImage = generateImgSrc({ src: 'ocoda_logo_full_gradient.png', options: { w: 1200, h: 627 } });
+  const metaDescriptiveImage = generateImgSrc({ src: 'ocoda_og.jpg', options: { w: 1200, h: 627 } });
+
   return json({
     locale: paramsLocale,
     copy,
     origin,
-    images: {
-      og: generateImgSrc({ src: 'ocoda_og.jpg', options: { w: 1200, h: 627 } }),
+    meta: {
+      images: { descriptive: metaDescriptiveImage },
+      json: {
+        '@context': 'http://www.schema.org',
+        '@type': 'Organization',
+        name: copy.meta.name,
+        url: copy.meta.url,
+        logo: metaLogoImage,
+        image: metaDescriptiveImage,
+        description: copy.meta.description,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: copy.meta.address.city,
+          postalCode: copy.meta.address.zip,
+          addressCountry: copy.meta.address.country,
+        },
+      },
     },
   });
 };
@@ -70,7 +88,7 @@ export const links: LinksFunction = () => [
 ];
 
 export default function App() {
-  const { locale, copy, origin, images } = useLoaderData<typeof loader>();
+  const { locale, copy, origin, meta } = useLoaderData<typeof loader>();
   const { i18n } = useTranslation();
 
   useChangeLanguage(locale);
@@ -81,21 +99,22 @@ export default function App() {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta />
-        <meta property="og:title" content={copy.meta.og.title} />
-        <meta property="og:description" content={copy.meta.og.description} />
-        <meta property="og:site_name" content={copy.meta.og.site_name} />
+        <meta property="og:title" content={copy.meta.title} />
+        <meta property="og:description" content={copy.meta.description} />
+        <meta property="og:site_name" content={copy.meta.title} />
         <meta property="og:locale" content={locale} />
-        <meta property="og:image" content={images.og} />
+        <meta property="og:image" content={meta.images.descriptive} />
         <meta property="og:image:type" content={'image/jpeg'} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="627" />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:title" content={copy.meta.og.title} />
-        <meta property="twitter:description" content={copy.meta.og.description} />
+        <meta property="twitter:title" content={copy.meta.title} />
+        <meta property="twitter:description" content={copy.meta.description} />
         <meta property="twitter:image:type" content={'image/jpeg'} />
         <meta property="twitter:image:width" content="1200" />
         <meta property="twitter:image:height" content="627" />
+        <script type="application/ld+json">{JSON.stringify(meta.json)}</script>
         <Links />
       </head>
       <body className="bg-gradient-to-r from-10% from-white lg:from-0% via-gray-300 print:via-white to-gray-500 lg:to-gray-600 print:to-white text-white leading-normal tracking-normal">
