@@ -114,7 +114,12 @@ export default function App() {
         <meta property="twitter:image:type" content={'image/jpeg'} />
         <meta property="twitter:image:width" content="1200" />
         <meta property="twitter:image:height" content="627" />
-        <script type="application/ld+json">{JSON.stringify(meta.json)}</script>
+        <script
+          key={`script:ld+json:${json}`}
+          type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: The quotes can't be escaped in this case
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(meta.json, null, 0) }}
+        />
         <Links />
       </head>
       <body className="bg-gradient-to-r from-10% from-white lg:from-0% via-gray-300 print:via-white to-gray-500 lg:to-gray-600 print:to-white text-white leading-normal tracking-normal">
