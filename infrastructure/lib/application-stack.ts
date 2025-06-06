@@ -3,11 +3,7 @@ import { Duration } from 'aws-cdk-lib';
 import {
   AllowedMethods,
   CachePolicy,
-  Function as CloudfrontFunction,
   Distribution,
-  FunctionCode,
-  FunctionEventType,
-  FunctionRuntime,
   HttpVersion,
   type IDistribution,
   OriginRequestPolicy,
@@ -24,8 +20,6 @@ import {
   Runtime,
 } from 'aws-cdk-lib/aws-lambda';
 import { RetentionDays } from 'aws-cdk-lib/aws-logs';
-import { ARecord, AaaaRecord, RecordTarget } from 'aws-cdk-lib/aws-route53';
-import { CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
 import { BucketPolicy, type IBucket } from 'aws-cdk-lib/aws-s3';
 import { BucketDeployment, CacheControl, Source } from 'aws-cdk-lib/aws-s3-deployment';
 import type { Construct } from 'constructs';
@@ -50,7 +44,6 @@ export class ApplicationStack extends Stack {
     const serverFunctionUrl = this.createRemixServerFunction();
 
     const serverDistribution = this.createServerDistribution(buckets.website, domains.website, serverFunctionUrl);
-    this.createRecords(domains.website, serverDistribution);
 
     this.createRemixBucketDeployment(buckets.website, serverDistribution);
   }
@@ -78,16 +71,10 @@ export class ApplicationStack extends Stack {
 
     const bucketOrigin = S3BucketOrigin.withOriginAccessControl(bucket);
 
-    const redirectFunction = new CloudfrontFunction(this, 'RedirectApexFunction', {
-      comment: 'Redirect apex domain to www subdomain',
-      code: FunctionCode.fromFile({ filePath: join(__dirname, '../code/redirect-apex.js') }),
-      runtime: FunctionRuntime.JS_2_0,
-    });
-
     return new Distribution(this, 'OcodaWebsiteDistribution', {
       comment: 'Ocoda website distribution',
-      domainNames: [domain.apex, domain.url],
-      certificate: domain.getCertificate('us-east-1'),
+      domainNames: [domain.url],
+      // certificate: domain.getCertificate('us-east-1'),
       defaultBehavior: {
         origin: new FunctionUrlOrigin(serverFnUrl),
         originRequestPolicy: OriginRequestPolicy.ALL_VIEWER_EXCEPT_HOST_HEADER,
@@ -95,7 +82,6 @@ export class ApplicationStack extends Stack {
         cachePolicy: CachePolicy.CACHING_DISABLED,
         compress: true,
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-        functionAssociations: [{ eventType: FunctionEventType.VIEWER_REQUEST, function: redirectFunction }],
       },
       httpVersion: HttpVersion.HTTP2_AND_3,
       minimumProtocolVersion: SecurityPolicyProtocol.TLS_V1_2_2021,
@@ -134,21 +120,6 @@ export class ApplicationStack extends Stack {
         },
       },
     });
-  }
-
-  private createRecords(domain: Domain, distribution: IDistribution) {
-    const config = {
-      zone: domain.hostedZone,
-      target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
-    };
-
-    // Apex
-    new ARecord(this, 'OcodaWebsiteApexARecord', { ...config, recordName: domain.apex });
-    new AaaaRecord(this, 'OcodaWebsiteApexAAAARecord', { ...config, recordName: domain.apex });
-
-    // www
-    new ARecord(this, 'OcodaWebsiteARecord', { ...config, recordName: domain.url });
-    new AaaaRecord(this, 'OcodaWebsiteAAAARecord', { ...config, recordName: domain.url });
   }
 
   private createRemixBucketDeployment(destinationBucket: IBucket, distribution: IDistribution) {
